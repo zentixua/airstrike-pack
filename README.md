@@ -29,9 +29,14 @@ Sinytra Connector, Forgified Fabric API, Flashback NeoForge Fixed) нужна т
 1. Prism: «Папка» (папка игры экземпляра, там `mods` и `saves`): переименовать `mods` в `mods-old` и положить
    туда же [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/latest).
 2. «Изменить…» → «Параметры» → «Пользовательские команды»: включить и в «Предстартовая команда» вписать
-   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/airstrike/main/pack/pack.toml`
+   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`
 3. Запустить: packwiz-installer скачает моды сборки заново и спросит про необязательные. Свои моды не из сборки, если
    они были, вернуть из `mods-old` в `mods`.
+
+Экземпляр, который ставил сборку из прежнего адреса (`zentixua/airstrike/main/pack/pack.toml`, до переезда сборки в
+этот репозиторий), переводится один раз: «Изменить…» → «Параметры» → «Пользовательские команды» → в «Предстартовой
+команде» заменить `zentixua/airstrike/main/pack/pack.toml` на `zentixua/airstrike-pack/main/pack/pack.toml`. Моды и миры
+остаются; прежний адрес отдаёт ту же сборку без новых версий, пока его не уберут.
 
 `mods` в сторону — потому что удаляет packwiz-installer только то, что ставил сам: jar старой версии сборки с другим
 именем (`airstrike-2.5.0.jar` у 0.1.0) остался бы рядом с новым, и игра не запустилась бы с двумя Airstrike. Файлы
@@ -77,7 +82,7 @@ TrueUUID — он стоит и на сервере, и у каждого игр
 `client` сервер не ставит.
 Мод ведущего (`airstrike-gm`, из выпуска Airstrike 2.9.0) — `side = "server"`: через него Claude ведёт игру на сервере,
 клиентам он не нужен и у них не ставится. Его мост слушает только адрес из `config/airstrike_gm-common.toml` с ключом
-из `config/airstrike_gm/token` (устройство — `.claude/rules/gm.md`).
+из `config/airstrike_gm/token` (устройство — [`.claude/rules/gm.md`](https://github.com/zentixua/airstrike/blob/main/.claude/rules/gm.md) в репозитории мода).
 
 Карта мира на сервере. В одиночке Xaero's World Map читает карту прямо из файлов мира, а в мультиплеере рисует только
 чанки, которые сервер прислал игроку. Всю карту мира игрокам отдаёт MapSyncer (стоит на сервере и у каждого игрока):
@@ -126,15 +131,15 @@ Distant Horizons на macOS (Apple Silicon) выключать: DH 3.3.3 зап�
 
 | версия | Airstrike | что изменилось |
 |---|---|---|
-| 0.1.11 | 2.9.0 | Airstrike 2.9.0 ([заметки](../docs/releases/2.9.0.md)): боеприпасы, разведка, точность, Отбой своих, ядерный удар без оператора, ЗРК; мод ведущего 0.1.2 на сервере; остальные моды и настройки те же |
-| 0.1.10 | 2.8.1 | Мод ведущего airstrike-gm 0.1.0 ([заметки](../docs/releases/2.8.2.md)), только на сервере: игрокам ничего не скачивается |
-| 0.1.9 | 2.8.1 | Airstrike 2.8.1 ([заметки](../docs/releases/2.8.1.md)): фиксы по итогам игры 03.10; остальные моды и настройки те же |
+| 0.1.11 | 2.9.0 | Airstrike 2.9.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.9.0.md)): боеприпасы, разведка, точность, Отбой своих, ядерный удар без оператора, ЗРК; мод ведущего 0.1.2 на сервере; остальные моды и настройки те же |
+| 0.1.10 | 2.8.1 | Мод ведущего airstrike-gm 0.1.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.8.2.md)), только на сервере: игрокам ничего не скачивается |
+| 0.1.9 | 2.8.1 | Airstrike 2.8.1 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.8.1.md)): фиксы по итогам игры 03.10; остальные моды и настройки те же |
 | 0.1.8 | 2.8.0 | MapSyncer: вся карта мира с сервера в Xaero's World Map; Xaero's World Map и Minimap — и на сервере |
 | 0.1.7 | 2.8.0 | TrueUUID: вход на выделенный сервер сборки с лицензией и без неё |
-| 0.1.6 | 2.8.0 | Airstrike 2.8.0 ([заметки](../docs/releases/2.8.0.md)); остальные моды и настройки те же |
+| 0.1.6 | 2.8.0 | Airstrike 2.8.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.8.0.md)); остальные моды и настройки те же |
 | 0.1.5 | 2.7.0 | More Culling (+ Cloth Config): рамки с предметами дешевле для потока отрисовки |
 | 0.1.4 | 2.7.0 | Distant Horizons — необязательный (по умолчанию включён): на macOS его выключают, DH 3.3.3 там роняет игру |
-| 0.1.3 | 2.7.0 | Airstrike 2.7.0 ([заметки](../docs/releases/2.7.0.md)); остальные моды и настройки те же |
+| 0.1.3 | 2.7.0 | Airstrike 2.7.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.7.0.md)); остальные моды и настройки те же |
 | 0.1.2 | 2.6.0 | автообновление (packwiz-installer); LAN Server Properties — вход без лицензии в мир хоста, временно |
-| 0.1.1 | 2.6.0 | Airstrike 2.6.0 ([заметки](../docs/releases/2.6.0.md)); остальные моды и настройки те же |
+| 0.1.1 | 2.6.0 | Airstrike 2.6.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.6.0.md)); остальные моды и настройки те же |
 | 0.1.0 | 2.5.0 | первая версия |

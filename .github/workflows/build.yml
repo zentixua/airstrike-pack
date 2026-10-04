@@ -1,0 +1,56 @@
+# Сборка «Airstrike Pack» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются — .mrpack и экземпляр Prism,
+# который ставит сборку с main сам при каждом запуске (tools/prism_instance.py); оба — в артефактах запуска.
+name: build
+
+# Каждый коммит проверяется один раз: ветки — запуском pull_request (он и решает слияние), main — push.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    name: Сборка модов
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: pack
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.24'
+          cache: false
+
+      - name: packwiz
+        run: go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
+
+      # .pw.toml правят руками или packwiz; индекс с их хешами должен быть пересчитан тем же коммитом
+      - name: Индекс свежий
+        run: |
+          packwiz refresh
+          git diff --exit-code -- .
+
+      - name: Файл для лаунчера
+        run: packwiz mr export -o "airstrike-pack-$(sed -n 's/^version = "\(.*\)"$/\1/p' pack.toml).mrpack"
+
+      - name: Экземпляр Prism с автообновлением
+        run: python3 ../tools/prism_instance.py "Airstrike Pack.zip"
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: airstrike-pack
+          path: |
+            pack/*.mrpack
+            pack/Airstrike Pack.zip
+          if-no-files-found: error

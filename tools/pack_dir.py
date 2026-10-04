@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Каталог игры из своей сборки pack/ (packwiz) — без Prism и без packwiz: для проверок клиентом prod_client.py.
+"""Каталог игры из сборки pack/ (packwiz) — без Prism и без packwiz: для проверок клиентом prod_client.py Airstrike.
 
-  tools/pack_dir.py mod/run/pack-b [--optional]
-  tools/prod_client.py <сценарий> --no-copy --dir mod/run/pack-b   (сборку мода со сценариями кладёт prod_client.py)
+  tools/pack_dir.py ../airstrike/mod/run/pack-b [--optional]
+  (в zentixua/airstrike) tools/prod_client.py <сценарий> --no-copy --dir mod/run/pack-b
+                                                            (сборку мода со сценариями кладёт prod_client.py)
 
 Те же файлы, что ставит Prism из .mrpack сборки: моды и шейдерпаки по `*.pw.toml` (скачанный файл сверяется с хешем
 из них), остальное из index.toml (`config/…`) — как есть. Только для клиента: `side = "server"` не ставится;
 необязательные (`[option] optional = true`) — как их галочка по умолчанию (`default`, как у packwiz-installer):
 выключенные — `<файл>.disabled`, как их ставит Prism без галочки; с --optional — все включёнными. Индекс должен быть
 свежим (хеши метафайлов сверяются, как в CI: `packwiz refresh`).
-Скачанное лежит в кэше по хешу (по умолчанию mod/run/pack-cache) и второй раз не качается. Каталог должен быть новым
+Скачанное лежит в кэше по хешу (по умолчанию run/pack-cache) и второй раз не качается. Каталог должен быть новым
 или без mods/: смешивать с прежним набором модов нельзя.
 """
 import argparse
@@ -22,11 +23,9 @@ import time
 import tomllib
 import urllib.request
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import paths  # noqa: E402
-
-PACK = os.path.join(paths.ROOT, "pack")
-USER_AGENT = "zentixua/airstrike tools/pack_dir.py"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PACK = os.path.join(ROOT, "pack")
+USER_AGENT = "zentixua/airstrike-pack tools/pack_dir.py"
 
 
 def digest(path, algo):
@@ -76,7 +75,7 @@ def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     ap.add_argument("dir", help="каталог игры (новый)")
     ap.add_argument("--optional", action="store_true", help="все необязательные моды включить")
-    ap.add_argument("--cache", default=os.path.join(paths.MOD, "run", "pack-cache"))
+    ap.add_argument("--cache", default=os.path.join(ROOT, "run", "pack-cache"))
     a = ap.parse_args()
     dest = os.path.abspath(a.dir)
     if os.path.isdir(os.path.join(dest, "mods")):
