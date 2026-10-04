@@ -33,6 +33,11 @@ hash = "f2ffa7cca9fd45f2007624df89f47eafc5c8eb59cb660b41d643f0ed6de26123"
 metafile = true
 
 [[files]]
+file = "mods/almighty.pw.toml"
+hash = "e94f038e67a2eaedd6f64c131c817822c0ed9215e8ec77fe52933f2e2d84fdba"
+metafile = true
+
+[[files]]
 file = "mods/chunky.pw.toml"
 hash = "68cc51e721e993a8b7a2cbaf45369933b22b07a9c82327ab14757ee10684aa81"
 metafile = true
