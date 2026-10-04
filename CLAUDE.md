@@ -3,7 +3,7 @@
 Своя сборка «Airstrike Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Airstrike, Distant
 Horizons, шейдеры, запись повторов. Что в ней и как её ставить — README.md. Репозиторий выделен из zentixua/airstrike
 вместе с историей: номера PR до переезда — `zentixua/airstrike#N`. Мод — https://github.com/zentixua/airstrike,
-мод ведущего (только сервер) — пока там же (`mod/gm`, выходит в выпусках Airstrike).
+мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
 
 ## Люди и правила
 - Автор/хост: **Артём** (GitHub zentixua, в игре ZentixUA). Друзья: **ENOTzRPG**, **WallyFillmark**. Общаемся
@@ -38,14 +38,14 @@ cd pack && packwiz mr export              # .mrpack — разовая уста�
 python3 tools/prism_instance.py           # dist/Airstrike Pack.zip — новый экземпляр с автообновлением
 ```
 Новый выпуск Airstrike: `packwiz url add Airstrike https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`;
-мод ведущего — так же, `airstrike-gm-<версия>.jar` из того же выпуска, `side = "server"`.
+Almighty — так же, `almighty-<версия>.jar` из выпуска https://github.com/zentixua/almighty, `side = "server"`.
 
 ## Подводные камни
 - GitHub отдаёт raw-файлы с кэшем до 5 минут: сразу после слияния `pack.toml` и `index.toml` могут быть из разных
   коммитов — packwiz-installer скажет про неверный хеш индекса («Quit», запустить позже). Сервер перезапускать через
   ~5 минут после слияния.
 - `side` у модов должен быть верным: сервер ставит сборку с `-s server`, `client` он не ставит; мод только для сервера
-  (мод ведущего) — `side = "server"`, игрокам он не скачивается.
+  (Almighty, Chunky) — `side = "server"`, игрокам он не скачивается.
 - packwiz-installer удаляет только то, что ставил сам: экземпляр из `.mrpack` переводят на автообновление, убрав
   `mods` в сторону (README.md), иначе старый jar с другим именем остался бы рядом с новым.
 - Путь в индексе не выходит за `pack/` (packwiz-installer отбрасывает лишние `..`), а `pack.toml` несёт хеш индекса:
