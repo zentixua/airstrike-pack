@@ -65,6 +65,7 @@ Distant Horizons отметить (кроме macOS).
 | мультиплеер и удобство | Essential, TrueUUID (вход на сервер, ниже), LAN Server Properties (временно, ниже), JEI (+ MezzConfig), Jade, Jade Sable Compat, Xaero's Minimap и World Map (+ MapSyncer: вся карта мира с сервера), Create – Xaero's map, GraveStone и его патч для Sable, Mouse Tweaks, No Chat Reports |
 | запись (по выбору) | Flashback, Flashback NeoForge Fixed, Sinytra Connector, Forgified Fabric API |
 | клавиши | Default Options (+ Balm): раскладка сборки (ниже) |
+| замер производительности | spark: на сервере `/spark tps`, `/spark health`, `/spark profiler` (операторы), у себя в клиенте — `/sparkc` |
 | только на сервере | Almighty (мост ведущего, ниже) |
 
 LAN Server Properties — временно, чтобы в мир хоста мог зайти игрок без входа в аккаунт Microsoft; уберём по слову
@@ -186,6 +187,7 @@ Default Options — только у игроков. Его библиотека 
 
 | версия | Airstrike | что изменилось |
 |---|---|---|
+| 0.1.15 | 2.10.0 | spark: TPS, MSPT, память и профилировщик сервера и клиента |
 | 0.1.14 | 2.10.0 | Chunky убран с сервера: вместе с Distant Horizons он ронял запуск сервера (DH обращается к Chunky, пока тот не загружен) |
 | 0.1.13 | 2.10.0 | Раскладка клавиш сборки без пересечений (Default Options + Balm, [ниже](#клавиши)); в уже стоящем экземпляре — «Сбросить настройки» в «Назначении клавиш» |
 | 0.1.12 | 2.10.0 | Airstrike 2.10.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.0.md)): стационарная пусковая, залп с места пуска и через точки маршрута, руководство игрока; мод ведущего теперь Almighty 0.2.0 ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.0.md)), только на сервере; Chunky на сервере; остальные моды и настройки те же |
