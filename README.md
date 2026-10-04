@@ -65,7 +65,7 @@ Distant Horizons отметить (кроме macOS).
 | мультиплеер и удобство | Essential, TrueUUID (вход на сервер, ниже), LAN Server Properties (временно, ниже), JEI (+ MezzConfig), Jade, Jade Sable Compat, Xaero's Minimap и World Map (+ MapSyncer: вся карта мира с сервера), Create – Xaero's map, GraveStone и его патч для Sable, Mouse Tweaks, No Chat Reports |
 | запись (по выбору) | Flashback, Flashback NeoForge Fixed, Sinytra Connector, Forgified Fabric API |
 | клавиши | Default Options (+ Balm): раскладка сборки (ниже) |
-| только на сервере | Almighty (мост ведущего, ниже), Chunky (заранее прогружает мир) |
+| только на сервере | Almighty (мост ведущего, ниже) |
 
 LAN Server Properties — временно, чтобы в мир хоста мог зайти игрок без входа в аккаунт Microsoft; уберём по слову
 Артёма. Хост: пауза → «Открыть для сети» → «Проверка лицензии»: «Без проверки лицензии + исправление UUID» → «Открыть
@@ -82,9 +82,8 @@ TrueUUID — он стоит и на сервере, и у каждого игр
 `allowOfflineForUnknownOnly` — значения по умолчанию): под ником игрока с лицензией без неё не войти. Моды сервер
 ставит из этой же `pack/` (`packwiz-installer-bootstrap -g -s server`), поэтому `side` у модов должен быть верным:
 `client` сервер не ставит.
-Только на сервере (`side = "server"`, клиентам не нужны и у них не ставятся): мост ведущего
-[Almighty](https://github.com/zentixua/almighty), через который Claude ведёт игру на сервере, и
-[Chunky](https://modrinth.com/mod/chunky) — заранее прогружает мир командой `/chunky`, его настройки по умолчанию.
+Только на сервере (`side = "server"`, клиентам не нужен и у них не ставится): мост ведущего
+[Almighty](https://github.com/zentixua/almighty), через который Claude ведёт игру на сервере.
 Мост Almighty слушает только адрес из `config/almighty-common.toml` с ключом из `config/almighty/token` (устройство —
 [CLAUDE.md](https://github.com/zentixua/almighty/blob/main/CLAUDE.md) в репозитории моста).
 
@@ -187,6 +186,7 @@ Default Options — только у игроков. Его библиотека 
 
 | версия | Airstrike | что изменилось |
 |---|---|---|
+| 0.1.14 | 2.10.0 | Chunky убран с сервера: вместе с Distant Horizons он ронял запуск сервера (DH обращается к Chunky, пока тот не загружен) |
 | 0.1.13 | 2.10.0 | Раскладка клавиш сборки без пересечений (Default Options + Balm, [ниже](#клавиши)); в уже стоящем экземпляре — «Сбросить всё» в «Управлении» |
 | 0.1.12 | 2.10.0 | Airstrike 2.10.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.0.md)): стационарная пусковая, залп с места пуска и через точки маршрута, руководство игрока; мод ведущего теперь Almighty 0.2.0 ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.0.md)), только на сервере; Chunky на сервере; остальные моды и настройки те же |
 | 0.1.11 | 2.9.0 | Airstrike 2.9.0 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.9.0.md)): боеприпасы, разведка, точность, Отбой своих, ядерный удар без оператора, ЗРК; мод ведущего 0.1.2 на сервере; остальные моды и настройки те же |
