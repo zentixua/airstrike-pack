@@ -33,12 +33,12 @@ metafile = true
 
 [[files]]
 file = "mods/airstrike.pw.toml"
-hash = "f2ffa7cca9fd45f2007624df89f47eafc5c8eb59cb660b41d643f0ed6de26123"
+hash = "59364f63ec8ca13fa6a183157a77a7c1a21a442364dde29d6de54c8fa68b1459"
 metafile = true
 
 [[files]]
 file = "mods/almighty.pw.toml"
-hash = "e94f038e67a2eaedd6f64c131c817822c0ed9215e8ec77fe52933f2e2d84fdba"
+hash = "2be3bc6123741bb0e272e681dca356e0e89ad3dd5a9fc482ee6304f6bb762562"
 metafile = true
 
 [[files]]
