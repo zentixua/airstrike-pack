@@ -33,7 +33,7 @@ metafile = true
 
 [[files]]
 file = "mods/airstrike.pw.toml"
-hash = "59364f63ec8ca13fa6a183157a77a7c1a21a442364dde29d6de54c8fa68b1459"
+hash = "8cb91804c1cf27d7211199f925d3268e1e380c1f24f8944e288517249653490b"
 metafile = true
 
 [[files]]
