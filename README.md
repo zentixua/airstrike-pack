@@ -187,6 +187,7 @@ Default Options — только у игроков. Его библиотека 
 
 | версия | Airstrike | что изменилось |
 |---|---|---|
+| 0.1.19 | 2.10.2 | Airstrike 2.10.2 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.2.md)): блик пожара и взрыва вдали больше не светит сквозь дома |
 | 0.1.18 | 2.10.1 | Almighty 0.3.0 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.0.md)): ведущий надёжнее водит самолёты и корабли — выключился автопилот, бот отпускает рули |
 | 0.1.17 | 2.10.1 | Almighty 0.2.2 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.2.md)): постройка ведущего по координатам корабля Create Aeronautics больше не роняет сервер |
 | 0.1.16 | 2.10.1 | Airstrike 2.10.1: сервер не копит загруженные чанки после множества залпов; Almighty 0.2.1 на сервере: бот-пилот не теряет самолёт |

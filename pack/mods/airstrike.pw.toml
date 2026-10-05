@@ -1,8 +1,8 @@
 name = "Airstrike"
-filename = "airstrike-2.10.1.jar"
+filename = "airstrike-2.10.2.jar"
 side = "both"
 
 [download]
-url = "https://github.com/zentixua/airstrike/releases/download/v2.10.1/airstrike-2.10.1.jar"
+url = "https://github.com/zentixua/airstrike/releases/download/v2.10.2/airstrike-2.10.2.jar"
 hash-format = "sha256"
-hash = "6dade2ebf851593ed76d0f1817701899ca45e98eb05190463c128934cfe4c035"
+hash = "674264a20741de211ef2a9556aeaffd4478a62d51d0572c45386c5bbe03cef70"
