@@ -187,6 +187,7 @@ Default Options — только у игроков. Его библиотека 
 
 | версия | Airstrike | что изменилось |
 |---|---|---|
+| 0.1.20 | 2.10.2 | Моды — до последних версий для 1.21.1: Sable 2.0.6 (сущности снова стоят на жидкостях, как страйдеры), Xaero's Minimap 26.6.0 и World Map 1.47.0, JEI 19.57.0.451 и MezzConfig 0.6.8, Flashback NeoForge Fixed 1.0.14; NeoForge 21.1.256 — на запуске packwiz-installer спросит, обновить ли его в экземпляре |
 | 0.1.19 | 2.10.2 | Airstrike 2.10.2 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.2.md)): блик пожара и взрыва вдали больше не светит сквозь дома |
 | 0.1.18 | 2.10.1 | Almighty 0.3.0 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.0.md)): ведущий надёжнее водит самолёты и корабли — выключился автопилот, бот отпускает рули |
 | 0.1.17 | 2.10.1 | Almighty 0.2.2 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.2.md)): постройка ведущего по координатам корабля Create Aeronautics больше не роняет сервер |
