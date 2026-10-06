@@ -1,12 +1,12 @@
 name = "Airstrike Pack"
 author = "zentixua"
-version = "0.1.20"
+version = "0.1.21"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "fb3f8ee9152b8d825052382f7aca85b086bcadaf23054c79738840850deab78f"
+hash = "8e470cec5fa943b092c6608fa6defd2d6608c7a260b87379100b3e456be125ef"
 
 [versions]
 minecraft = "1.21.1"

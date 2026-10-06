@@ -66,7 +66,7 @@ Distant Horizons отметить (кроме macOS).
 | запись (по выбору) | Flashback, Flashback NeoForge Fixed, Sinytra Connector, Forgified Fabric API |
 | клавиши | Default Options (+ Balm): раскладка сборки (ниже) |
 | замер производительности | spark: на сервере `/spark tps`, `/spark health`, `/spark profiler` (операторы), у себя в клиенте — `/sparkc` |
-| только на сервере | Almighty (мост ведущего, ниже) |
+| только на сервере | Almighty (мост ведущего, ниже), ServerCore (производительность сервера, ниже) |
 
 LAN Server Properties — временно, чтобы в мир хоста мог зайти игрок без входа в аккаунт Microsoft; уберём по слову
 Артёма. Хост: пауза → «Открыть для сети» → «Проверка лицензии»: «Без проверки лицензии + исправление UUID» → «Открыть
@@ -84,7 +84,8 @@ TrueUUID — он стоит и на сервере, и у каждого игр
 ставит из этой же `pack/` (`packwiz-installer-bootstrap -g -s server`), поэтому `side` у модов должен быть верным:
 `client` сервер не ставит.
 Только на сервере (`side = "server"`, клиентам не нужен и у них не ставится): мост ведущего
-[Almighty](https://github.com/zentixua/almighty), через который Claude ведёт игру на сервере.
+[Almighty](https://github.com/zentixua/almighty), через который Claude ведёт игру на сервере, и
+[ServerCore](https://modrinth.com/mod/servercore) — производительность сервера (настройки ниже).
 Мост Almighty слушает только адрес из `config/almighty-common.toml` с ключом из `config/almighty/token` (устройство —
 [CLAUDE.md](https://github.com/zentixua/almighty/blob/main/CLAUDE.md) в репозитории моста).
 
@@ -122,6 +123,14 @@ Distant Horizons на macOS (Apple Silicon) выключать: DH 3.3.3 зап�
   правку Aeronautics, по которой грань у левитита рисуется (`levitite/BlockMixin`), а даёт оно меньше вершин видеокарте,
   которая в замере 03.10.2026 была занята на 34 %, пока поток отрисовки стоял на 100 %.
 - `config/defaultoptions/keybindings.txt` — раскладка клавиш сборки (ниже).
+- `config/servercore/config.yml`, `optimizations.yml` — значения ServerCore 1.5.19 по умолчанию, кроме двух. Дальность
+  активации (`activation-range`, как у Paper) включена: мобы и стойки для брони дальше 16–48 блоков от игроков тикают
+  раз в 20 тиков, пока их ничто не будит (падают, в воде, их бьют, у них цель). Всё, что не моб и не стойка (снаряды
+  Airstrike, контрапции Create, самолёты, снаряды пушек, предметы), из проверок исключено: тип по умолчанию —
+  `tick-interval: 1`. Динамика (`dynamic`) включена: когда тик дольше 35 мс, сервер на время сужает дальность тика
+  чанков и симуляции до 6 чанков и лимит мобов до 50 %, а когда нагрузка спадает, возвращает 10 чанков и 100 %;
+  дальность прорисовки не трогает. Замер 06.10.2026 на копии Project Zearth (6 игроков в разных городах, ночь):
+  работа потока сервера на тик −33 % (с одной дальностью активации — −27 %).
 
 ## Клавиши
 
@@ -187,6 +196,7 @@ Default Options — только у игроков. Его библиотека 
 
 | версия | Airstrike | что изменилось |
 |---|---|---|
+| 0.1.21 | 2.10.3 | Производительность сервера: Airstrike 2.10.3 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.3.md)) — удары не нагружают тик там, где их никто не видит; Almighty 0.3.1 ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.1.md)) — стоящие боты ведущего не нагружают сервер; ServerCore на сервере (настройки выше). Замер на копии Zearth, 6 игроков и кампания ведущего по всей карте: работа потока сервера 193 → 72 мс на тик (вместе с G1 на сервере) |
 | 0.1.20 | 2.10.2 | Моды — до последних версий для 1.21.1: Sable 2.0.6 (сущности снова стоят на жидкостях, как страйдеры), Xaero's Minimap 26.6.0 и World Map 1.47.0, JEI 19.57.0.451 и MezzConfig 0.6.8, Flashback NeoForge Fixed 1.0.14; NeoForge 21.1.256 — на запуске packwiz-installer спросит, обновить ли его в экземпляре |
 | 0.1.19 | 2.10.2 | Airstrike 2.10.2 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.2.md)): блик пожара и взрыва вдали больше не светит сквозь дома |
 | 0.1.18 | 2.10.1 | Almighty 0.3.0 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.0.md)): ведущий надёжнее водит самолёты и корабли — выключился автопилот, бот отпускает рули |
