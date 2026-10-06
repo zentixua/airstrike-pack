@@ -18,7 +18,7 @@ hash = "2704aa71d40b744fa4f4ac0bd37cbb787dbf50d8404015ac5ae331245f95afb9"
 
 [[files]]
 file = "config/servercore/config.yml"
-hash = "7f15039a6474c67b8b5da292f5729f50f9504052d58273acbd93a0117877522f"
+hash = "d64f636ca82a6bde95d10b006b5608192adac77fa0500cdd40c9b2fb2dae2d47"
 
 [[files]]
 file = "config/servercore/optimizations.yml"
