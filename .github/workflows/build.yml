@@ -48,44 +48,74 @@ jobs:
 
       - name: Версия сборки
         id: version
-        run: echo "version=$(sed -n 's/^version = "\(.*\)"$/\1/p' pack.toml)" >> "$GITHUB_OUTPUT"
+        run: |
+          v=$(sed -n 's/^version = "\(.*\)"$/\1/p' pack.toml)
+          [ -n "$v" ] || { echo "pack.toml: нет version"; exit 1; }
+          echo "version=$v" >> "$GITHUB_OUTPUT"
 
-      # имена без версии: у релиза releases/latest/download/<имя> всегда ведёт к последней сборке
+      # имена без версии: у релиза releases/latest/download/<имя> всегда ведёт к последней сборке; Prism называет
+      # экземпляр по имени файла (пробел в имени файла выпуска GitHub заменил бы точкой)
       - name: Файл для лаунчера
-        run: packwiz mr export -o airstrike-pack.mrpack
+        run: packwiz mr export -o Airstrike-Pack.mrpack
 
       - name: Экземпляр Prism с автообновлением
-        run: python3 ../tools/prism_instance.py airstrike-pack-prism.zip
+        run: python3 ../tools/prism_instance.py Airstrike-Pack.zip
+
+      # заметки релиза — и на PR: новая версия без строки в «Версиях» README.md не дойдёт до main
+      - name: Заметки релиза
+        env:
+          V: ${{ steps.version.outputs.version }}
+        run: |
+          # строка версии из таблицы «Версии» README.md: | версия | Airstrike | что изменилось |
+          row=$(awk -F ' [|] ' -v v="$V" '$1 == "| " v { print $2 "\t" substr($3, 1, length($3) - 2) }' ../README.md)
+          [ -n "$row" ] || { echo "README.md: нет строки версии $V в «Версиях»"; exit 1; }
+          airstrike=${row%%$'\t'*}
+          changes=${row#*$'\t'}
+          changes=${changes//](#/](https://github.com/zentixua/airstrike-pack#}  # якоря README — в заметках полной ссылкой
+          mc=$(sed -n 's/^minecraft = "\(.*\)"$/\1/p' pack.toml)
+          neoforge=$(sed -n 's/^neoforge = "\(.*\)"$/\1/p' pack.toml)
+          cat > release-notes.md <<EOF
+          Minecraft $mc, NeoForge $neoforge, Airstrike $airstrike. $changes
+
+          ## Установка
+          - \`Airstrike-Pack.zip\` — экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку перед каждым запуском игры: «Добавить экземпляр…» → «Импорт» → этот файл.
+          - \`Airstrike-Pack.mrpack\` — разовая установка этой версии без автообновления: импорт в Prism Launcher или Modrinth App.
+
+          Подробно — [README](https://github.com/zentixua/airstrike-pack#установка).
+          EOF
 
       - uses: actions/upload-artifact@v6
         with:
           name: airstrike-pack
           path: |
-            pack/airstrike-pack.mrpack
-            pack/airstrike-pack-prism.zip
+            pack/Airstrike-Pack.mrpack
+            pack/Airstrike-Pack.zip
+            pack/release-notes.md
           if-no-files-found: error
 
   release:
     name: Релиз
     needs: pack
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: write
     env:
       GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
       V: ${{ needs.pack.outputs.version }}
     steps:
-      - uses: actions/checkout@v5
-
       - name: Есть ли уже
         id: exists
         run: |
-          if gh release view "v$V" > /dev/null 2>&1; then
-            echo "Релиз v$V уже есть — сборка этой версии вышла раньше" >> "$GITHUB_STEP_SUMMARY"
-            echo "yes=true" >> "$GITHUB_OUTPUT"
-          fi
+          case $(gh release view "v$V" --json isDraft -q .isDraft 2>/dev/null) in
+            false)
+              echo "Релиз v$V уже есть — сборка этой версии вышла раньше" >> "$GITHUB_STEP_SUMMARY"
+              echo "yes=true" >> "$GITHUB_OUTPUT" ;;
+            # черновик остаётся от запуска, прерванного на загрузке файлов (gh выпускает через черновик): заново
+            true) gh release delete "v$V" --yes ;;
+          esac
 
       - uses: actions/download-artifact@v7
         if: steps.exists.outputs.yes != 'true'
@@ -96,21 +126,5 @@ jobs:
       - name: Релиз
         if: steps.exists.outputs.yes != 'true'
         run: |
-          # строка версии из таблицы «Версии» README.md: | версия | Airstrike | что изменилось |
-          row=$(awk -F ' [|] ' -v v="$V" '$1 == "| " v { print $2 "\t" substr($3, 1, length($3) - 2) }' README.md)
-          [ -n "$row" ] || { echo "README.md: нет строки версии $V в «Версии»"; exit 1; }
-          airstrike=${row%%$'\t'*}
-          changes=${row#*$'\t'}
-          mc=$(sed -n 's/^minecraft = "\(.*\)"$/\1/p' pack/pack.toml)
-          neoforge=$(sed -n 's/^neoforge = "\(.*\)"$/\1/p' pack/pack.toml)
-          cat > notes.md <<EOF
-          Minecraft $mc, NeoForge $neoforge, Airstrike $airstrike. $changes
-
-          ## Установка
-          - \`airstrike-pack-prism.zip\` — экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку перед каждым запуском игры: «Добавить экземпляр…» → «Импорт» → этот файл.
-          - \`airstrike-pack.mrpack\` — разовая установка этой версии без автообновления: импорт в Prism Launcher или Modrinth App.
-
-          Подробно — [README](https://github.com/zentixua/airstrike-pack#установка).
-          EOF
-          gh release create "v$V" dist/airstrike-pack-prism.zip dist/airstrike-pack.mrpack --target "$GITHUB_SHA" \
-            --title "Airstrike Pack $V" --notes-file notes.md --latest
+          gh release create "v$V" dist/Airstrike-Pack.zip dist/Airstrike-Pack.mrpack --target "$GITHUB_SHA" \
+            --title "Airstrike Pack $V" --notes-file dist/release-notes.md --latest

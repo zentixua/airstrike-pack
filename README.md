@@ -16,9 +16,9 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 ## Установка
 
 Скачать — из [последнего выпуска](https://github.com/zentixua/airstrike-pack/releases/latest), без входа на GitHub:
-- [airstrike-pack-prism.zip](https://github.com/zentixua/airstrike-pack/releases/latest/download/airstrike-pack-prism.zip)
+- [Airstrike-Pack.zip](https://github.com/zentixua/airstrike-pack/releases/latest/download/Airstrike-Pack.zip)
   — экземпляр [Prism Launcher](https://prismlauncher.org/download/) с автообновлением (ниже);
-- [airstrike-pack.mrpack](https://github.com/zentixua/airstrike-pack/releases/latest/download/airstrike-pack.mrpack)
+- [Airstrike-Pack.mrpack](https://github.com/zentixua/airstrike-pack/releases/latest/download/Airstrike-Pack.mrpack)
   — разовая установка одной версии в Prism Launcher или Modrinth App, без автообновления (в конце раздела).
 
 Выпуск `v<версия>` выходит сам, когда на `main` приходит новая версия сборки; ссылки выше всегда ведут к последнему.
@@ -28,7 +28,7 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 этого репозитория — новое докачивает, убранное из сборки удаляет. Свои файлы игрока (миры, настройки, моды не из
 сборки) он не трогает; файл из `config/` сборки перезаписывает, только когда сборка его меняет.
 
-Новый экземпляр: Prism → «Добавить экземпляр…» → «Импорт» → `airstrike-pack-prism.zip` (выпуск выше, артефакт CI
+Новый экземпляр: Prism → «Добавить экземпляр…» → «Импорт» → `Airstrike-Pack.zip` (выпуск выше, артефакт CI
 `airstrike-pack` или `tools/prism_instance.py`). В нём Minecraft и NeoForge из `pack.toml`, 6144 МБ памяти,
 `packwiz-installer-bootstrap.jar` в папке игры и команда перед запуском. Первый запуск скачивает моды и спрашивает про
 необязательные: запись (Flashback, Sinytra Connector, Forgified Fabric API, Flashback NeoForge Fixed) нужна только тем,
