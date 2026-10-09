@@ -5,7 +5,8 @@
 
 Сборка описана файлами [packwiz](https://packwiz.infra.link/): `pack.toml` (версии игры и NeoForge), `mods/*.pw.toml` и
 `shaderpacks/*.pw.toml` (откуда скачать каждый файл и его хеш), остальное — файлы, которые кладутся в игру как есть
-(`config/`). Файл для лаунчера, `.mrpack`, собирает CI (артефакт `airstrike-pack`) или руками:
+(`config/`). Файлы для лаунчера собирает CI (артефакт `airstrike-pack`, у новой версии на `main` — и
+[выпуск](https://github.com/zentixua/airstrike-pack/releases/latest)), `.mrpack` можно и руками:
 
 ```sh
 go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
@@ -14,16 +15,24 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 
 ## Установка
 
+Скачать — из [последнего выпуска](https://github.com/zentixua/airstrike-pack/releases/latest), без входа на GitHub:
+- [Airstrike-Pack.zip](https://github.com/zentixua/airstrike-pack/releases/latest/download/Airstrike-Pack.zip)
+  — экземпляр [Prism Launcher](https://prismlauncher.org/download/) с автообновлением (ниже);
+- [Airstrike-Pack.mrpack](https://github.com/zentixua/airstrike-pack/releases/latest/download/Airstrike-Pack.mrpack)
+  — разовая установка одной версии в Prism Launcher или Modrinth App, без автообновления (в конце раздела).
+
+Выпуск `v<версия>` выходит сам, когда на `main` приходит новая версия сборки; ссылки выше всегда ведут к последнему.
+
 Сборка обновляется сама: перед каждым запуском игры Prism Launcher запускает
 [packwiz-installer](https://packwiz.infra.link/tutorials/installing/packwiz-installer/), и тот ставит `pack/` с `main`
 этого репозитория — новое докачивает, убранное из сборки удаляет. Свои файлы игрока (миры, настройки, моды не из
 сборки) он не трогает; файл из `config/` сборки перезаписывает, только когда сборка его меняет.
 
-Новый экземпляр: Prism → «Добавить экземпляр…» → «Импорт» → `Airstrike Pack.zip` (артефакт CI `airstrike-pack` или
-`tools/prism_instance.py`). В нём Minecraft и NeoForge из `pack.toml`, 6144 МБ памяти, `packwiz-installer-bootstrap.jar`
-в папке игры и команда перед запуском. Первый запуск скачивает моды и спрашивает про необязательные: запись (Flashback,
-Sinytra Connector, Forgified Fabric API, Flashback NeoForge Fixed) нужна только тем, кто снимает; Distant Horizons
-включён, на macOS его выключить (ниже).
+Новый экземпляр: Prism → «Добавить экземпляр…» → «Импорт» → `Airstrike-Pack.zip` (выпуск выше, артефакт CI
+`airstrike-pack` или `tools/prism_instance.py`). В нём Minecraft и NeoForge из `pack.toml`, 6144 МБ памяти,
+`packwiz-installer-bootstrap.jar` в папке игры и команда перед запуском. Первый запуск скачивает моды и спрашивает про
+необязательные: запись (Flashback, Sinytra Connector, Forgified Fabric API, Flashback NeoForge Fixed) нужна только тем,
+кто снимает; Distant Horizons включён, на macOS его выключить (ниже).
 
 Экземпляр, поставленный из `.mrpack`, переводится на автообновление так же, миры остаются:
 1. Prism: «Папка» (папка игры экземпляра, там `mods` и `saves`): переименовать `mods` в `mods-old` и положить
@@ -49,9 +58,9 @@ Sinytra Connector, Forgified Fabric API, Flashback NeoForge Fixed) нужна т
 `pack.toml` и `index.toml` разных коммитов, и packwiz-installer скажет про неверный хеш индекса — «Quit» и запустить
 снова позже.
 
-`.mrpack` (`packwiz mr export`, артефакт CI) — разовая установка без автообновления: «Импорт» этого файла, Prism сам
-спросит про необязательные моды. Галочек по умолчанию в формате Modrinth нет, и Prism предлагает их все выключенными:
-Distant Horizons отметить (кроме macOS).
+`.mrpack` (выпуск выше, артефакт CI или `packwiz mr export`) — разовая установка без автообновления: «Импорт» этого
+файла, Prism сам спросит про необязательные моды. Галочек по умолчанию в формате Modrinth нет, и Prism предлагает их все
+выключенными: Distant Horizons отметить (кроме macOS).
 
 ## Что внутри
 
@@ -189,6 +198,8 @@ Default Options — только у игроков. Его библиотека 
   версия), потом `packwiz refresh`. CI проверяет, что `index.toml` свежий.
 - Новый выпуск Airstrike: `packwiz url add Airstrike https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`.
 - Версию сборки (`version` в `pack.toml`) поднимать при каждом изменении состава: у всех игроков должен быть один набор.
+  Новая версия на `main` выходит сама — CI выпускает `v<версия>` с `.mrpack` и экземпляром Prism, заметки берёт из
+  её строки в «Версиях» ниже (без строки релиз не выйдет).
 - `pack/` на `main` игроки ставят при следующем запуске игры: в `main` — только проверенное CI и только jar Airstrike
   из уже вышедшего выпуска (PR сборки — после релиза).
 

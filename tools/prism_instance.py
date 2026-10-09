@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Экземпляр Prism Launcher со сборкой pack/, которая обновляется сама при каждом запуске игры.
 
-  tools/prism_instance.py ["dist/Airstrike Pack.zip"]
+  tools/prism_instance.py [dist/Airstrike-Pack.zip]
 
 В архиве — пустой экземпляр (Minecraft и NeoForge из pack.toml, память как в инструкции для друзей) и
 packwiz-installer-bootstrap в папке игры, а команда перед запуском экземпляра — packwiz-installer со сборкой
@@ -39,7 +39,7 @@ def ini_value(s):
 
 def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("out", nargs="?", default=os.path.join(ROOT, "dist", "Airstrike Pack.zip"))
+    ap.add_argument("out", nargs="?", default=os.path.join(ROOT, "dist", "Airstrike-Pack.zip"))
     a = ap.parse_args()
 
     with open(os.path.join(ROOT, "pack", "pack.toml"), "rb") as f:
