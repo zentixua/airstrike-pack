@@ -15,16 +15,19 @@ Horizons, шейдеры, запись повторов. Что в ней и к�
   в `config/` — с причиной в README.md. Новый обязательный мод — только по слову Артёма.
 - Версию (`version` в `pack.toml`) поднимать при каждом изменении состава и строку в таблицу версий README.md:
   у всех игроков один набор.
-- Публичные шаги (выпуск сборки на Modrinth, публикация) — только по прямому слову Артёма.
+- Выпуск на GitHub — сам: новая `version` на `main` выходит релизом `v<version>` (Артём, 09.10.2026: «нормально сборку
+  опубликуй» — скачивание без входа по `releases/latest/download/airstrike-pack-prism.zip` и `…/airstrike-pack.mrpack`).
+  Остальные публичные шаги (Modrinth и др.) — только по прямому слову Артёма.
 - Готовый PR вливать самому после зелёного CI, чистого независимого ревью и вердикта координатора.
 
 ## Где что лежит
 ```
 pack/                    ← сама сборка: pack.toml (версии игры и NeoForge), index.toml, mods/*.pw.toml и
                            shaderpacks/*.pw.toml (откуда скачать и хеш), config/ (кладётся в игру как есть)
-tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Airstrike Pack.zip)
+tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (airstrike-pack-prism.zip)
 tools/pack_dir.py        ← каталог игры из pack/ без Prism (моды по хешам) — для проверок клиентом Airstrike
-.github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт airstrike-pack)
+.github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт airstrike-pack);
+                               новая version на main — релиз v<version> с ними (заметки — строка README «Версии»)
 ```
 Адрес сборки для packwiz-installer: `https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`.
 Сборка лежит в `pack/`, а не в корне: файлы репозитория (README, CI, инструменты) не попадают в индекс и в игру.
@@ -35,7 +38,7 @@ go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
 cd pack && packwiz update <имя>           # мод с Modrinth; точная версия — packwiz modrinth add --project-id … --version-id …
 cd pack && packwiz refresh                # индекс с хешами — тем же коммитом (CI проверяет)
 cd pack && packwiz mr export              # .mrpack — разовая установка без автообновления
-python3 tools/prism_instance.py           # dist/Airstrike Pack.zip — новый экземпляр с автообновлением
+python3 tools/prism_instance.py           # dist/airstrike-pack-prism.zip — новый экземпляр с автообновлением
 ```
 Новый выпуск Airstrike: `packwiz url add Airstrike https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`;
 Almighty — так же, `almighty-<версия>.jar` из выпуска https://github.com/zentixua/almighty, `side = "server"`.
