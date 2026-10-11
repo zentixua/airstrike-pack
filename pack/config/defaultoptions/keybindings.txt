@@ -60,11 +60,15 @@ key_key.immersive_aircraft.fallback_control_forward:key.keyboard.unknown:
 key_key.immersive_aircraft.fallback_control_backward:key.keyboard.unknown:
 key_key.immersive_aircraft.fallback_control_up:key.keyboard.unknown:
 key_key.immersive_aircraft.fallback_control_down:key.keyboard.unknown:
+key_key.immersive_aircraft.fallback_control_throttle_up:key.keyboard.unknown:
+key_key.immersive_aircraft.fallback_control_throttle_down:key.keyboard.unknown:
 key_key.immersive_aircraft.fallback_control_pull:key.keyboard.unknown:
 key_key.immersive_aircraft.fallback_control_push:key.keyboard.unknown:
 key_key.immersive_aircraft.fallback_use:key.keyboard.unknown:
 key_key.immersive_aircraft.dismount:key.keyboard.x:
 key_key.immersive_aircraft.boost:key.keyboard.left.control:
+key_key.immersive_aircraft.mouse_control:key.keyboard.grave.accent:
+key_key.immersive_aircraft.free_look:key.keyboard.h:
 key_gui.xaero_open_map:key.keyboard.m:
 key_gui.xaero_open_settings:key.keyboard.right.bracket:
 key_gui.xaero_world_map_server_settings:key.keyboard.unknown:
