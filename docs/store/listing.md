@@ -17,9 +17,9 @@ Fields to paste into the Modrinth and CurseForge project forms. The long descrip
 | CurseForge categories | Tech, Combat / PvP, Multiplayer (names to confirm in the CurseForge form) |
 | Environment | Client and server. A server is optional: the pack also runs in single player. |
 | License | GPL-3.0-only (the files in the repository; each mod keeps its own license) |
-| Source | https://github.com/zentixua/airstrike-pack |
-| Issues | https://github.com/zentixua/airstrike-pack/issues |
-| Install guide | https://github.com/zentixua/airstrike-pack#installation |
+| Source | https://github.com/zentixua/incoming-pack |
+| Issues | https://github.com/zentixua/incoming-pack/issues |
+| Install guide | https://github.com/zentixua/incoming-pack#installation |
 
 The summary is 143 characters (limit 256) and matches `description` in `pack/pack.toml`, which `packwiz mr export`
 writes into the `.mrpack` as its summary.
@@ -27,14 +27,14 @@ writes into the `.mrpack` as its summary.
 ## Gallery
 
 There are no images in this repository. These images from the Incoming player guide
-(`zentixua/airstrike`, `docs/guide/img`) can be used:
+(`zentixua/incoming`, `docs/guide/img`) can be used:
 
 | image | size | shows |
 |---|---|---|
-| https://raw.githubusercontent.com/zentixua/airstrike/main/docs/guide/img/nuke.jpg | 1280×480 | nuclear strike over a city, from outside it |
-| https://raw.githubusercontent.com/zentixua/airstrike/main/docs/guide/img/nuke-wave.jpg | 1280×720 | fireball over a city, with shaders |
-| https://raw.githubusercontent.com/zentixua/airstrike/main/docs/guide/img/nuke-ruins.jpg | 1280×720 | city after the strike |
-| https://raw.githubusercontent.com/zentixua/airstrike/main/docs/guide/img/weapon-shahed.jpg and the other `weapon-*.jpg` | 640×360 | single weapons against the sky |
+| https://raw.githubusercontent.com/zentixua/incoming/main/docs/guide/img/nuke.jpg | 1280×480 | nuclear strike over a city, from outside it |
+| https://raw.githubusercontent.com/zentixua/incoming/main/docs/guide/img/nuke-wave.jpg | 1280×720 | fireball over a city, with shaders |
+| https://raw.githubusercontent.com/zentixua/incoming/main/docs/guide/img/nuke-ruins.jpg | 1280×720 | city after the strike |
+| https://raw.githubusercontent.com/zentixua/incoming/main/docs/guide/img/weapon-shahed.jpg and the other `weapon-*.jpg` | 640×360 | single weapons against the sky |
 
 Screenshots with the HUD (`sam.webp`, `scope.webp`, `hud.webp`, `camera.webp`, `map.gif`, `remote.gif`) were taken
 with the game in Russian (for example, `sam.webp` has Russian HUD text) and need English versions before they go into
@@ -42,7 +42,7 @@ an English gallery. The `weapon-*.jpg` images are small for a gallery.
 
 Missing:
 
-- An icon. None exists in the three repositories; `zentixua/airstrike` has `tools/trailer/icon_from_frames.py`, which
+- An icon. None exists in the three repositories; `zentixua/incoming` has `tools/trailer/icon_from_frames.py`, which
   makes the mod's icon from trailer frames, but no icon file is committed.
 - Screenshots of the pack itself: a Create Aeronautics aircraft in flight, Immersive Aircraft, Big Cannons or Point
   Blank, the view with Distant Horizons and shaders.
@@ -52,9 +52,8 @@ Missing:
 
 1. **Modrinth: file hosts.** A `.mrpack` may download files only from hosts that Modrinth allows. Modrinth's server
    code (`WHITELISTED_MODPACK_DOMAINS` in `apps/labrinth/.env.local` of `modrinth/code`) lists `cdn.modrinth.com`,
-   `github.com` and `raw.githubusercontent.com`; packwiz's export check also allows `gitlab.com`. Modrinth's help page
-   on the format (support.modrinth.com) could not be opened from here (HTTP 403). In this pack, 57 mods and the shader
-   pack come from `cdn.modrinth.com`; Incoming (`airstrike-<version>.jar`) and Almighty (`almighty-<version>.jar`)
+   `github.com` and `raw.githubusercontent.com`; packwiz's export check also allows `gitlab.com`. In this pack, 57 mods and the shader
+   pack come from `cdn.modrinth.com`; Incoming (`incoming-<version>.jar`) and Almighty (`almighty-<version>.jar`)
    come from GitHub release downloads on `github.com`, which is allowed. Once Incoming and Almighty have Modrinth
    projects, switching their `.pw.toml` files to Modrinth metadata makes them appear as normal Modrinth dependencies
    of the pack.

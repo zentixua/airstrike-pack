@@ -21,7 +21,7 @@ import urllib.request
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PACK_URL = "https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml"
+PACK_URL = "https://raw.githubusercontent.com/zentixua/incoming-pack/main/pack/pack.toml"
 BOOTSTRAP = "packwiz-installer-bootstrap.jar"
 BOOTSTRAP_URL = f"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/{BOOTSTRAP}"
 BOOTSTRAP_SHA256 = "a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d116c"
@@ -29,7 +29,7 @@ BOOTSTRAP_SHA256 = "a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d
 MAX_MEMORY_MB = 6144
 # компоненты Prism (mmc-pack.json) по ключам [versions] в pack.toml — те же, что сверяет packwiz-installer
 COMPONENTS = {"minecraft": "net.minecraft", "neoforge": "net.neoforged"}
-USER_AGENT = "zentixua/airstrike-pack tools/prism_instance.py"
+USER_AGENT = "zentixua/incoming-pack tools/prism_instance.py"
 
 
 def ini_value(s):

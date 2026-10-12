@@ -2,10 +2,10 @@
 
 English · [Русский](README.ru.md)
 
-A NeoForge modpack for Minecraft 1.21.1 built around the [Incoming](https://github.com/zentixua/airstrike) mod. Before
-version 0.1.24 the pack was called Airstrike Pack and the mod Airstrike.
+A NeoForge modpack for Minecraft 1.21.1 built around the [Incoming](https://github.com/zentixua/incoming) mod. The pack
+was called Airstrike Pack before version 0.1.24, and the mod was called Airstrike before its version 3.0.0.
 
-Next to Incoming it has Create and Create Aeronautics for building and flying machines, aircraft and weapon mods,
+Besides Incoming, it has Create and Create Aeronautics for building and flying machines, aircraft and weapon mods,
 Distant Horizons, a shader pack and replay recording.
 
 The pack is described by [packwiz](https://packwiz.infra.link/) files in `pack/`: `pack.toml` (Minecraft and NeoForge
@@ -14,12 +14,12 @@ versions), `mods/*.pw.toml` and `shaderpacks/*.pw.toml` (where to download each 
 
 ## Installation
 
-Download from the [latest release](https://github.com/zentixua/airstrike-pack/releases/latest); no GitHub account is
+Download from the [latest release](https://github.com/zentixua/incoming-pack/releases/latest); no GitHub account is
 needed:
 
-- [Incoming-Pack.zip](https://github.com/zentixua/airstrike-pack/releases/latest/download/Incoming-Pack.zip):
+- [Incoming-Pack.zip](https://github.com/zentixua/incoming-pack/releases/latest/download/Incoming-Pack.zip):
   a [Prism Launcher](https://prismlauncher.org/download/) instance that updates the pack by itself.
-- [Incoming-Pack.mrpack](https://github.com/zentixua/airstrike-pack/releases/latest/download/Incoming-Pack.mrpack):
+- [Incoming-Pack.mrpack](https://github.com/zentixua/incoming-pack/releases/latest/download/Incoming-Pack.mrpack):
   a one-time install of one version for Prism Launcher or the Modrinth App, without automatic updates.
 
 A release `v<version>` is published when a new pack version reaches `main`. The links above always point to the
@@ -50,7 +50,9 @@ packwiz-installer window shows **Continue**, which starts the game (it continues
 ### One-time install from .mrpack
 
 Import `Incoming-Pack.mrpack` in Prism Launcher or the Modrinth App. The Modrinth format has no default state for
-optional mods, so Prism offers all of them unticked: tick Distant Horizons unless you are on macOS.
+optional mods. Prism offers all of them unticked: tick Distant Horizons unless you are on macOS. The Modrinth App does
+not ask and installs all of them: on macOS, turn Distant Horizons off in the instance's content list. The four
+recording mods can be turned off there too.
 
 To switch an instance installed from `.mrpack` to automatic updates (worlds stay):
 
@@ -58,20 +60,13 @@ To switch an instance installed from `.mrpack` to automatic updates (worlds stay
    and put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/latest)
    in the same folder.
 2. **Edit** → **Settings** → **Custom commands**: turn them on and set **Pre-launch command** to
-   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`
+   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/incoming-pack/main/pack/pack.toml`
 3. Start the instance. packwiz-installer downloads the pack's mods again and asks about the optional ones. Move your
    own mods, if you had any, back from `mods-old` to `mods`.
 
 `mods` has to be moved aside because packwiz-installer deletes only files it installed itself. The mod's jar from an
-older pack version (`airstrike-<version>.jar`) has a different file name and would stay next to the new one, and the
-game does not start with two copies of the mod.
-
-### Instances that use the old address
-
-Instances set up before the pack moved to this repository install it from `zentixua/airstrike/main/pack/pack.toml`.
-That address serves the pack as it was at the move, gets no new versions and will be removed. To switch: **Edit** →
-**Settings** → **Custom commands** → in **Pre-launch command** replace `zentixua/airstrike/main/pack/pack.toml` with
-`zentixua/airstrike-pack/main/pack/pack.toml`. Mods and worlds stay.
+older pack version has a different file name (the version is part of it) and would stay next to the new one, and
+the game does not start with two copies of the mod.
 
 ## Optional mods
 
@@ -80,7 +75,9 @@ That address serves the pack as it was at the move, gets no new versions and wil
 | recording and replays | Flashback, Flashback NeoForge Fixed, Sinytra Connector, Forgified Fabric API | off |
 | far terrain | Distant Horizons | on |
 
-Recording is only needed if you record replays or videos.
+The defaults apply to the Prism instance with automatic updates. The four recording mods work only together:
+Flashback is a Fabric mod and runs through Sinytra Connector and Forgified Fabric API. They are only needed if you
+record replays or videos.
 
 Turn Distant Horizons off on macOS (Apple Silicon). DH 3.3.3 reads `GL_POLYGON_MODE` with `glGetInteger` into room for
 one value on the LWJGL stack, and Apple's OpenGL driver writes two. Every frame it writes 4 bytes past the end of the
@@ -96,7 +93,7 @@ Minecraft 1.21.1, NeoForge 21.1.259. Exact mod versions are in `pack/mods/*.pw.t
 
 | group | mods |
 |---|---|
-| core | Create, Sable, Create Aeronautics, Incoming (jar from its GitHub release), Distant Horizons (optional, on by default) |
+| core | Create, Sable, Create Aeronautics, Incoming (jar from its GitHub release), Distant Horizons (optional) |
 | performance | Sodium, Sodium Extra, Reese's Sodium Options, Iris, Colorwheel, Lithium, FerriteCore, ModernFix, ImmediatelyFast, Entity Culling, More Culling (+ Cloth Config), Dynamic FPS |
 | Create add-ons | Create Propulsion: Simulated, Aeroworks, Tweaked Controllers, Big Cannons (+ Ritchie's Projectile Library), Connected, Deco, Diesel Generators, Aeronautics Hot Air Fix |
 | aircraft and weapons | Immersive Aircraft, Man of Many Planes, Vic's Point Blank (+ GeckoLib), Point Blank Aeronautics compat |
@@ -114,7 +111,7 @@ A NeoForge 21.1.259 server for Minecraft 1.21.1 installs its mods from the same 
 server folder and run it there before each server start:
 
 ```sh
-java -jar packwiz-installer-bootstrap.jar -g -s server https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml
+java -jar packwiz-installer-bootstrap.jar -g -s server https://raw.githubusercontent.com/zentixua/incoming-pack/main/pack/pack.toml
 ```
 
 `-s server` skips client-only mods and installs two mods that only the server gets (players never download them):
@@ -163,7 +160,7 @@ The pack puts these files into `config/`, each for the reason given:
 - `entityculling.json`: Entity Culling defaults plus Incoming's entities (`airstrike:…`) in `entityWhitelist`. Entity
   Culling does not hide these entities and does not stop their client tick (in 1.11.3 the list covers both). A missile's
   exhaust flame is drawn with its model, while the smoke trail, the launch cloud and the smoke of burning debris are
-  spawned in the entity's client tick (`AirstrikeClient.entityTick`). Without the exception, a missile behind a hill or
+  spawned in the entity's client tick. Without the exception, a missile behind a hill or
   behind the player would lose its flame and its trail would break.
 - `aero_cam_sync-client.toml`: Aeronautics Camera Sync defaults and `configSchemaVersion = 5`. Version 1.4.0 writes a
   new file with schema version 0, and on the next start treats it as outdated and shows a "Config Reset" prompt
@@ -186,8 +183,8 @@ The pack puts these files into `config/`, each for the reason given:
     out of these checks: the default type has `tick-interval: 1`.
   - Dynamic settings are on: when a tick takes longer than 35 ms, the server lowers the chunk tick distance and the
     simulation distance to 6 chunks and the mob cap to 50 %. When the load drops, it brings them back up to 8 chunks
-    and 100 %. 8 is the simulation distance the pack's settings expect (`simulation-distance=8` in
-    `server.properties`). The view distance is not changed.
+    and 100 %. Set `simulation-distance=8` in `server.properties` to match: ServerCore does not
+    raise it above 8. The view distance is not changed.
   - Measured on 2026-10-06 on a copy of a server world with 6 players in different towns at night: server thread time
     per tick dropped by 33 % (by 27 % with activation range alone).
 
@@ -249,7 +246,7 @@ the server (`NetworkComponentNegotiator`).
 - A mod from Modrinth: `packwiz update <name>` (or `packwiz modrinth add --project-id <slug> --version-id <id>` for an
   exact version), then `packwiz refresh`. CI checks that `index.toml` is up to date.
 - A new Incoming release:
-  `packwiz url add Incoming https://github.com/zentixua/airstrike/releases/download/v<version>/airstrike-<version>.jar --meta-name airstrike`.
+  `packwiz url add Incoming https://github.com/zentixua/incoming/releases/download/v<version>/incoming-<version>.jar --meta-name incoming`.
   Almighty the same way, with `almighty-<version>.jar` from its [releases](https://github.com/zentixua/almighty/releases)
   and `side = "server"`.
 - Raise `version` in `pack.toml` on every change to the pack's contents, so that all players have the same set, and
@@ -272,28 +269,28 @@ Before 0.1.24 the pack was called Airstrike Pack and the mod Airstrike; older ro
 
 | version | Incoming | changes |
 |---|---|---|
-| 0.1.24 | 2.10.3 | The pack is now called Incoming Pack and the mod Incoming (mod version 2.10.3 still shows the old name in game); release files are now `Incoming-Pack.zip` and `Incoming-Pack.mrpack`; installed instances keep updating from the same address. LAN Server Properties removed. Entity Culling no longer stops the client tick of the mod's air defense missile, so its trail does not break. Pack texts in English (README, release notes, optional mod descriptions); the Russian README is now README.ru.md |
+| 0.1.24 | 2.10.3 | The pack is now called Incoming Pack, and its repository is zentixua/incoming-pack: old links lead there and installed instances keep updating. The mod is called Incoming from its version 3.0.0; this pack version still has Airstrike 2.10.3. Release files are now `Incoming-Pack.zip` and `Incoming-Pack.mrpack`. LAN Server Properties removed: a world opened to LAN no longer lets in players who are not signed in to a Microsoft account. Entity Culling no longer stops the client tick of the mod's air defense missile, so its trail does not break. Pack texts in English (README, release notes, optional mod descriptions); the Russian README is now README.ru.md |
 | 0.1.23 | 2.10.3 | Mods updated to their latest versions for 1.21.1: Immersive Aircraft 1.6.0 (aircraft need a slightly longer takeoff run; mouse steering is \`, free look is H, see [key bindings](#key-bindings)) and Man of Many Planes 0.2.3 for it, Entity Culling 1.11.3, ModernFix 5.27.26, Flashback NeoForge Fixed 1.0.15; NeoForge 21.1.259, packwiz-installer asks on start whether to update it in the instance |
 | 0.1.22 | 2.10.3 | ServerCore brings the chunk tick and simulation distance back up to at most 8 after load. In a test with 6 players, view distance 10 and simulation distance 8 (instead of 12 and 10) cut server thread time by 20 %; Distant Horizons draws the terrain further out |
-| 0.1.21 | 2.10.3 | Server performance: Airstrike 2.10.3 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.3.md)), strikes no longer load the server tick where nobody sees them; Almighty 0.3.1 ([notes](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.1.md)), idle game master bots no longer load the server; ServerCore on the server ([settings](#config-files)). In a test with 6 players and a game master campaign across the whole map, server thread time went from 193 to 72 ms per tick (together with the G1 garbage collector on the server) |
+| 0.1.21 | 2.10.3 | Server performance: Airstrike 2.10.3 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.10.3.md)), strikes no longer load the server tick where nobody sees them; Almighty 0.3.1 ([notes](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.1.md)), idle game master bots no longer load the server; ServerCore on the server ([settings](#config-files)). In a test with 6 players and a game master campaign across the whole map, server thread time went from 193 to 72 ms per tick (together with the G1 garbage collector on the server) |
 | 0.1.20 | 2.10.2 | Mods updated to their latest versions for 1.21.1: Sable 2.0.6 (entities stand on liquids again, like striders), Xaero's Minimap 26.6.0 and World Map 1.47.0, JEI 19.57.0.451 and MezzConfig 0.6.8, Flashback NeoForge Fixed 1.0.14; NeoForge 21.1.256, packwiz-installer asks on start whether to update it in the instance |
-| 0.1.19 | 2.10.2 | Airstrike 2.10.2 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.2.md)): the glow of distant fires and explosions no longer shows through houses |
+| 0.1.19 | 2.10.2 | Airstrike 2.10.2 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.10.2.md)): the glow of distant fires and explosions no longer shows through houses |
 | 0.1.18 | 2.10.1 | Almighty 0.3.0 on the server ([notes](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.0.md)): the game master flies aircraft and steers ships more reliably; when an autopilot rule switches off, the bot releases the controls |
 | 0.1.17 | 2.10.1 | Almighty 0.2.2 on the server ([notes](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.2.md)): building by the game master at the coordinates of a Create Aeronautics ship no longer crashes the server |
 | 0.1.16 | 2.10.1 | Airstrike 2.10.1: the server no longer piles up loaded chunks after many salvos; Almighty 0.2.1 on the server: the pilot bot no longer loses its aircraft |
 | 0.1.15 | 2.10.0 | spark: TPS, MSPT, memory and profiler for server and client |
 | 0.1.14 | 2.10.0 | Chunky removed from the server: together with Distant Horizons it crashed the server on startup (DH calls Chunky before Chunky is loaded) |
 | 0.1.13 | 2.10.0 | Key layout without conflicts (Default Options + Balm, see [key bindings](#key-bindings)); in an existing instance, use **Reset Keys** in **Key Binds** |
-| 0.1.12 | 2.10.0 | Airstrike 2.10.0 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.0.md)): fixed launcher, salvos from the launch site and along route waypoints, player guide; the game master mod is now Almighty 0.2.0 ([notes](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.0.md)), server only; Chunky on the server; other mods and settings unchanged |
-| 0.1.11 | 2.9.0 | Airstrike 2.9.0 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.9.0.md)): munitions, reconnaissance, accuracy, aborting your own strikes, nuclear strike without an operator, SAM site; game master mod 0.1.2 on the server; other mods and settings unchanged |
-| 0.1.10 | 2.8.1 | Game master mod airstrike-gm 0.1.0 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.8.2.md)), server only: players download nothing |
-| 0.1.9 | 2.8.1 | Airstrike 2.8.1 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.8.1.md)): fixes after a play session; other mods and settings unchanged |
+| 0.1.12 | 2.10.0 | Airstrike 2.10.0 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.10.0.md)): fixed launcher, salvos from the launch site and along route waypoints, player guide; the game master mod is now Almighty 0.2.0 ([notes](https://github.com/zentixua/almighty/blob/main/docs/releases/0.2.0.md)), server only; Chunky on the server; other mods and settings unchanged |
+| 0.1.11 | 2.9.0 | Airstrike 2.9.0 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.9.0.md)): munitions, reconnaissance, accuracy, aborting your own strikes, nuclear strike without an operator, SAM site; game master mod 0.1.2 on the server; other mods and settings unchanged |
+| 0.1.10 | 2.8.1 | Game master mod airstrike-gm 0.1.0 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.8.2.md)), server only: players download nothing |
+| 0.1.9 | 2.8.1 | Airstrike 2.8.1 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.8.1.md)): fixes after a play session; other mods and settings unchanged |
 | 0.1.8 | 2.8.0 | MapSyncer: the whole world map from the server in Xaero's World Map; Xaero's World Map and Minimap also on the server |
 | 0.1.7 | 2.8.0 | TrueUUID: joining the pack's dedicated server with or without a Minecraft license |
-| 0.1.6 | 2.8.0 | Airstrike 2.8.0 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.8.0.md)); other mods and settings unchanged |
+| 0.1.6 | 2.8.0 | Airstrike 2.8.0 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.8.0.md)); other mods and settings unchanged |
 | 0.1.5 | 2.7.0 | More Culling (+ Cloth Config): item frames cost less on the render thread |
 | 0.1.4 | 2.7.0 | Distant Horizons is optional (on by default): turn it off on macOS, where DH 3.3.3 crashes the game |
-| 0.1.3 | 2.7.0 | Airstrike 2.7.0 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.7.0.md)); other mods and settings unchanged |
+| 0.1.3 | 2.7.0 | Airstrike 2.7.0 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.7.0.md)); other mods and settings unchanged |
 | 0.1.2 | 2.6.0 | Automatic updates (packwiz-installer); LAN Server Properties for joining the host's LAN world without a license |
-| 0.1.1 | 2.6.0 | Airstrike 2.6.0 ([notes](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.6.0.md)); other mods and settings unchanged |
+| 0.1.1 | 2.6.0 | Airstrike 2.6.0 ([notes](https://github.com/zentixua/incoming/blob/main/docs/releases/2.6.0.md)); other mods and settings unchanged |
 | 0.1.0 | 2.5.0 | First version |

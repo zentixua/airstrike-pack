@@ -1,5 +1,6 @@
-# Сборка «Incoming Pack», прежде «Airstrike Pack» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются — .mrpack и экземпляр Prism,
-# который ставит сборку с main сам при каждом запуске (tools/prism_instance.py); оба — в артефактах запуска.
+# Сборка «Incoming Pack», прежде «Airstrike Pack» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются —
+# .mrpack и экземпляр Prism, который ставит сборку с main сам при каждом запуске (tools/prism_instance.py); оба — в
+# артефактах запуска.
 # Новая version в pack.toml на main выходит сама: релиз v<version> с этими файлами под постоянными именами, их
 # последняя версия скачивается без входа по releases/latest/download/<имя>.
 name: build
@@ -70,24 +71,24 @@ jobs:
           row=$(awk -F ' [|] ' -v v="$V" '/^## / { s = ($0 == "## Versions") }
             s && $1 == "| " v { print $2 "\t" substr($3, 1, length($3) - 2) }' ../README.md)
           [ -n "$row" ] || { echo "README.md: нет строки версии $V в «## Versions»"; exit 1; }
-          airstrike=${row%%$'\t'*}
+          incoming=${row%%$'\t'*}
           changes=${row#*$'\t'}
-          changes=${changes//](#/](https://github.com/zentixua/airstrike-pack#}  # якоря README — в заметках полной ссылкой
+          changes=${changes//](#/](https://github.com/zentixua/incoming-pack#}  # якоря README — в заметках полной ссылкой
           mc=$(sed -n 's/^minecraft = "\(.*\)"$/\1/p' pack.toml)
           neoforge=$(sed -n 's/^neoforge = "\(.*\)"$/\1/p' pack.toml)
           cat > release-notes.md <<EOF
-          Minecraft $mc, NeoForge $neoforge, Incoming $airstrike. $changes
+          Minecraft $mc, NeoForge $neoforge, Incoming $incoming. $changes
 
           ## Installation
           - \`Incoming-Pack.zip\`: a [Prism Launcher](https://prismlauncher.org/download/) instance that updates the pack before every game start. In Prism: Add Instance → Import → this file.
           - \`Incoming-Pack.mrpack\`: a one-time install of this version without automatic updates. Import it in Prism Launcher or the Modrinth App.
 
-          Details: [README](https://github.com/zentixua/airstrike-pack#installation).
+          Details: [README](https://github.com/zentixua/incoming-pack#installation).
           EOF
 
       - uses: actions/upload-artifact@v6
         with:
-          name: airstrike-pack
+          name: incoming-pack
           path: |
             pack/Incoming-Pack.mrpack
             pack/Incoming-Pack.zip
@@ -121,7 +122,7 @@ jobs:
       - uses: actions/download-artifact@v7
         if: steps.exists.outputs.yes != 'true'
         with:
-          name: airstrike-pack
+          name: incoming-pack
           path: dist
 
       - name: Релиз

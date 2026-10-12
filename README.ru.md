@@ -2,8 +2,8 @@
 
 [English](README.md) · Русский
 
-Сборка NeoForge для Minecraft 1.21.1 вокруг мода [Incoming](https://github.com/zentixua/airstrike). До версии 0.1.24
-сборка называлась Airstrike Pack, а мод — Airstrike.
+Сборка NeoForge для Minecraft 1.21.1 вокруг мода [Incoming](https://github.com/zentixua/incoming). До версии 0.1.24
+сборка называлась Airstrike Pack, а мод до своей версии 3.0.0 — Airstrike.
 
 Кроме Incoming в ней Create и Create Aeronautics для построек и летательных аппаратов, моды на самолёты и оружие,
 Distant Horizons, шейдерпак и запись повторов.
@@ -14,11 +14,11 @@ Distant Horizons, шейдерпак и запись повторов.
 
 ## Установка
 
-Скачать — из [последнего выпуска](https://github.com/zentixua/airstrike-pack/releases/latest), без входа на GitHub:
+Скачать — из [последнего выпуска](https://github.com/zentixua/incoming-pack/releases/latest), без входа на GitHub:
 
-- [Incoming-Pack.zip](https://github.com/zentixua/airstrike-pack/releases/latest/download/Incoming-Pack.zip) —
+- [Incoming-Pack.zip](https://github.com/zentixua/incoming-pack/releases/latest/download/Incoming-Pack.zip) —
   экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку.
-- [Incoming-Pack.mrpack](https://github.com/zentixua/airstrike-pack/releases/latest/download/Incoming-Pack.mrpack) —
+- [Incoming-Pack.mrpack](https://github.com/zentixua/incoming-pack/releases/latest/download/Incoming-Pack.mrpack) —
   разовая установка одной версии в Prism Launcher или Modrinth App, без автообновления.
 
 Выпуск `v<версия>` выходит, когда на `main` приходит новая версия сборки. Ссылки выше всегда ведут к последнему.
@@ -46,28 +46,22 @@ packwiz-installer есть «Continue» — сразу в игру (само ч�
 
 ### Разовая установка из .mrpack
 
-Импортировать `Incoming-Pack.mrpack` в Prism Launcher или Modrinth App. Галочек по умолчанию в формате Modrinth нет,
-и Prism предлагает все необязательные моды выключенными: Distant Horizons отметить (кроме macOS).
+Импортировать `Incoming-Pack.mrpack` в Prism Launcher или Modrinth App. Галочек по умолчанию в формате Modrinth нет.
+Prism предлагает все необязательные моды выключенными: Distant Horizons отметить (кроме macOS). Modrinth App не
+спрашивает и ставит все: на macOS выключить Distant Horizons в списке содержимого экземпляра, там же можно выключить
+четыре мода записи.
 
-Экземпляр из `.mrpack` переводится на автообновление так, миры остаются:
+Экземпляр из `.mrpack` переводится на автообновление так (миры остаются):
 
 1. В Prism открыть «Папка» экземпляра (папка игры, там `mods` и `saves`). Переименовать `mods` в `mods-old` и
    положить туда же [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/latest).
 2. «Изменить…» → «Параметры» → «Пользовательские команды»: включить и в «Предстартовая команда» вписать
-   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`
+   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/incoming-pack/main/pack/pack.toml`
 3. Запустить. packwiz-installer скачает моды сборки заново и спросит про необязательные. Свои моды, если были,
    вернуть из `mods-old` в `mods`.
 
 `mods` убирается в сторону, потому что packwiz-installer удаляет только то, что ставил сам. Jar мода из прежней версии
-сборки (`airstrike-<версия>.jar`) называется иначе и остался бы рядом с новым, а с двумя копиями мода игра не
-запускается.
-
-### Экземпляры с прежним адресом
-
-Экземпляры, поставленные до переезда сборки в этот репозиторий, ставят её из `zentixua/airstrike/main/pack/pack.toml`.
-Этот адрес отдаёт сборку такой, какой она была при переезде, новых версий не получает и будет убран. Перевести:
-«Изменить…» → «Параметры» → «Пользовательские команды» → в «Предстартовой команде» заменить
-`zentixua/airstrike/main/pack/pack.toml` на `zentixua/airstrike-pack/main/pack/pack.toml`. Моды и миры остаются.
+сборки называется иначе (в имени — версия) и остался бы рядом с новым, а с двумя копиями мода игра не запускается.
 
 ## Необязательные моды
 
@@ -76,7 +70,9 @@ packwiz-installer есть «Continue» — сразу в игру (само ч�
 | запись и повторы | Flashback, Flashback NeoForge Fixed, Sinytra Connector, Forgified Fabric API | выключено |
 | дальняя прорисовка | Distant Horizons | включено |
 
-Запись нужна только тем, кто снимает повторы или видео.
+Значения по умолчанию — для экземпляра Prism с автообновлением. Четыре мода записи работают только вместе:
+Flashback — мод для Fabric и идёт через Sinytra Connector и Forgified Fabric API. Нужны они только тем, кто снимает
+повторы или видео.
 
 Distant Horizons на macOS (Apple Silicon) выключать. DH 3.3.3 запрашивает `GL_POLYGON_MODE` через `glGetInteger` в
 место под одно число на стеке LWJGL, а драйвер OpenGL от Apple пишет два. Каждый кадр 4 байта уходят за конец буфера,
@@ -109,7 +105,7 @@ Minecraft 1.21.1, NeoForge 21.1.259. Точные версии модов — в
 сервера и запускать там перед каждым запуском сервера:
 
 ```sh
-java -jar packwiz-installer-bootstrap.jar -g -s server https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml
+java -jar packwiz-installer-bootstrap.jar -g -s server https://raw.githubusercontent.com/zentixua/incoming-pack/main/pack/pack.toml
 ```
 
 С `-s server` моды только для клиента не ставятся, а ставятся два мода, которые есть только у сервера (игрокам они не
@@ -157,7 +153,7 @@ Map и Minimap стоят и на сервере: так у каждого ми�
 - `entityculling.json` — значения Entity Culling по умолчанию плюс сущности Incoming (`airstrike:…`) в
   `entityWhitelist`. Такие сущности мод не прячет и не останавливает их тик на клиенте (в 1.11.3 список действует на
   оба). Факел снаряда рисуется вместе с моделью, а шлейф, облако пуска и дым горящих обломков рождаются в тике сущности
-  на клиенте (`AirstrikeClient.entityTick`). Без исключения снаряд за холмом или за спиной игрока терял бы факел и рвал
+  на клиенте. Без исключения снаряд за холмом или за спиной игрока терял бы факел и рвал
   шлейф.
 - `aero_cam_sync-client.toml` — значения Aeronautics Camera Sync по умолчанию и `configSchemaVersion = 5`. Версия
   1.4.0 сама пишет новый файл с версией схемы 0, а на следующем запуске считает его устаревшим и вместо главного меню
@@ -177,8 +173,8 @@ Map и Minimap стоят и на сервере: так у каждого ми�
     Incoming, контрапции Create, самолёты, снаряды пушек, предметы), из проверок исключено: у типа по умолчанию
     `tick-interval: 1`.
   - Динамика включена: когда тик дольше 35 мс, сервер сужает дальность тика чанков и симуляции до 6 чанков и лимит
-    мобов до 50 %, а когда нагрузка спадает, возвращает 8 чанков и 100 %. 8 — дальность симуляции, под которую
-    рассчитаны настройки сборки (`simulation-distance=8` в `server.properties`). Дальность прорисовки не меняется.
+    мобов до 50 %, а когда нагрузка спадает, возвращает 8 чанков и 100 %. В `server.properties` поставить
+    `simulation-distance=8`: выше 8 ServerCore её не поднимает. Дальность прорисовки не меняется.
   - Замер 06.10.2026 на копии мира сервера, 6 игроков в разных городах, ночь: работа потока сервера на тик −33 %
     (с одной дальностью активации — −27 %).
 
@@ -239,7 +235,7 @@ Default Options стоит только у игроков. Его библиот
 - Мод с Modrinth: `packwiz update <имя>` (или `packwiz modrinth add --project-id <slug> --version-id <id>` — точная
   версия), потом `packwiz refresh`. CI проверяет, что `index.toml` свежий.
 - Новый выпуск Incoming:
-  `packwiz url add Incoming https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`.
+  `packwiz url add Incoming https://github.com/zentixua/incoming/releases/download/v<версия>/incoming-<версия>.jar --meta-name incoming`.
   Almighty — так же, `almighty-<версия>.jar` из его [выпусков](https://github.com/zentixua/almighty/releases),
   `side = "server"`.
 - Версию сборки (`version` в `pack.toml`) поднимать при каждом изменении состава, чтобы у всех игроков был один набор,
