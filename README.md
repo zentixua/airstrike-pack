@@ -1,25 +1,25 @@
-# Airstrike Pack
+# Open Skies
 
-Своя сборка под мод Incoming: NeoForge 1.21.1, Create, Create Aeronautics, Distant Horizons, шейдеры и запись
-повторов.
+Своя сборка для игры с друзьями: NeoForge 1.21.1, Create, Create Aeronautics, Incoming, Distant Horizons, шейдеры и
+запись повторов, на сервере — Almighty.
 Без контента не по теме: оружие и техника, Create для построек и аппаратов, всё лишнее для такой игры не берём.
 
 Сборка описана файлами [packwiz](https://packwiz.infra.link/): `pack.toml` (версии игры и NeoForge), `mods/*.pw.toml` и
 `shaderpacks/*.pw.toml` (откуда скачать каждый файл и его хеш), остальное — файлы, которые кладутся в игру как есть
-(`config/`). Файлы для лаунчера собирает CI (артефакт `airstrike-pack`, у новой версии на `main` — и
-[выпуск](https://github.com/zentixua/airstrike-pack/releases/latest)), `.mrpack` можно и руками:
+(`config/`). Файлы для лаунчера собирает CI (артефакт `open-skies`, у новой версии на `main` — и
+[выпуск](https://github.com/zentixua/open-skies/releases/latest)), `.mrpack` можно и руками:
 
 ```sh
 go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
-cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
+cd pack && packwiz mr export      # → Open Skies-<версия>.mrpack
 ```
 
 ## Установка
 
-Скачать — из [последнего выпуска](https://github.com/zentixua/airstrike-pack/releases/latest), без входа на GitHub:
-- [Airstrike-Pack.zip](https://github.com/zentixua/airstrike-pack/releases/latest/download/Airstrike-Pack.zip)
+Скачать — из [последнего выпуска](https://github.com/zentixua/open-skies/releases/latest), без входа на GitHub:
+- [Open-Skies.zip](https://github.com/zentixua/open-skies/releases/latest/download/Open-Skies.zip)
   — экземпляр [Prism Launcher](https://prismlauncher.org/download/) с автообновлением (ниже);
-- [Airstrike-Pack.mrpack](https://github.com/zentixua/airstrike-pack/releases/latest/download/Airstrike-Pack.mrpack)
+- [Open-Skies.mrpack](https://github.com/zentixua/open-skies/releases/latest/download/Open-Skies.mrpack)
   — разовая установка одной версии в Prism Launcher или Modrinth App, без автообновления (в конце раздела).
 
 Выпуск `v<версия>` выходит сам, когда на `main` приходит новая версия сборки; ссылки выше всегда ведут к последнему.
@@ -29,8 +29,8 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 этого репозитория — новое докачивает, убранное из сборки удаляет. Свои файлы игрока (миры, настройки, моды не из
 сборки) он не трогает; файл из `config/` сборки перезаписывает, только когда сборка его меняет.
 
-Новый экземпляр: Prism → «Добавить экземпляр…» → «Импорт» → `Airstrike-Pack.zip` (выпуск выше, артефакт CI
-`airstrike-pack` или `tools/prism_instance.py`). В нём Minecraft и NeoForge из `pack.toml`, 6144 МБ памяти,
+Новый экземпляр: Prism → «Добавить экземпляр…» → «Импорт» → `Open-Skies.zip` (выпуск выше, артефакт CI
+`open-skies` или `tools/prism_instance.py`). В нём Minecraft и NeoForge из `pack.toml`, 6144 МБ памяти,
 `packwiz-installer-bootstrap.jar` в папке игры и команда перед запуском. Первый запуск скачивает моды и спрашивает про
 необязательные: запись (Flashback, Sinytra Connector, Forgified Fabric API, Flashback NeoForge Fixed) нужна только тем,
 кто снимает; Distant Horizons включён, на macOS его выключить (ниже).
@@ -39,9 +39,13 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 1. Prism: «Папка» (папка игры экземпляра, там `mods` и `saves`): переименовать `mods` в `mods-old` и положить
    туда же [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/latest).
 2. «Изменить…» → «Параметры» → «Пользовательские команды»: включить и в «Предстартовая команда» вписать
-   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`
+   `"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/zentixua/open-skies/main/pack/pack.toml`
 3. Запустить: packwiz-installer скачает моды сборки заново и спросит про необязательные. Свои моды не из сборки, если
    они были, вернуть из `mods-old` в `mods`.
+
+Экземпляр, поставленный под прежним именем сборки (Airstrike Pack), обновляется как прежде: GitHub отдаёт файлы и по
+старому адресу `zentixua/airstrike-pack`. Ссылки на прежние файлы выпуска (`Airstrike-Pack.zip`,
+`Airstrike-Pack.mrpack`) больше не работают: новая установка — из файлов выше.
 
 `mods` в сторону — потому что удаляет packwiz-installer только то, что ставил сам: jar старой версии сборки с другим
 именем (`airstrike-2.5.0.jar` у 0.1.0) остался бы рядом с новым, и игра не запустилась бы с двумя Airstrike. Файлы
@@ -197,13 +201,14 @@ Default Options — только у игроков. Его библиотека 
 - Версию сборки (`version` в `pack.toml`) поднимать при каждом изменении состава: у всех игроков должен быть один набор.
   Новая версия на `main` выходит сама — CI выпускает `v<версия>` с `.mrpack` и экземпляром Prism, заметки берёт из
   её строки в «Версиях» ниже (без строки релиз не выйдет).
-- `pack/` на `main` игроки ставят при следующем запуске игры: в `main` — только проверенное CI и только jar Airstrike
-  из уже вышедшего выпуска (PR сборки — после релиза).
+- `pack/` на `main` игроки ставят при следующем запуске игры: в `main` — только проверенное CI и только jar модов
+  из уже вышедших выпусков (PR сборки — после релиза).
 
 ## Версии
 
 | версия | мод | что изменилось |
 |---|---|---|
+| 0.1.26 | 3.0.1 | Сборка теперь называется Open Skies: файлы установки `Open-Skies.zip` и `Open-Skies.mrpack`, репозиторий zentixua/open-skies, прежние ссылки на `Airstrike-Pack.zip` и `.mrpack` больше не работают. Поставленные экземпляры обновляются как прежде, моды и настройки те же ([установка](#установка)) |
 | 0.1.25 | 3.0.1 | Incoming 3.0.1 ([заметки](https://github.com/zentixua/incoming/blob/main/docs/releases/3.0.1.md)) — ЗРК настоящей величины, надписи пульта помещаются в окно и кнопки; Almighty 0.4.0 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.4.0.md)) — тексты моста по-английски, набор ведущего в `mcp/gm` |
 | 0.1.24 | 3.0.0 | Мод Airstrike теперь называется Incoming: Incoming 3.0.0 ([заметки](https://github.com/zentixua/incoming/blob/main/docs/releases/3.0.0.md)) — команда `/incoming`, настройки `incoming-server.toml` и `incoming-client.toml` (прежние `airstrike-*.toml` переименовать, иначе настройки по умолчанию), клавиши мода — снова по умолчанию; старые миры с блоками, предметами и следами ударов мода открываются как прежде |
 | 0.1.23 | 2.10.3 | Моды — до последних версий для 1.21.1: Immersive Aircraft 1.6.0 (самолётам нужен разбег чуть длиннее, руль мышью — \` (Ё), свободный обзор — H, [клавиши](#клавиши)) и Man of Many Planes 0.2.3 под него, Entity Culling 1.11.3, ModernFix 5.27.26, Flashback NeoForge Fixed 1.0.15; NeoForge 21.1.259 — на запуске packwiz-installer спросит, обновить ли его в экземпляре |

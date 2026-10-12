@@ -1,7 +1,7 @@
-# Airstrike Pack — сборка NeoForge 1.21.1 под мод Incoming
+# Open Skies — сборка NeoForge 1.21.1 Артёма и друзей
 
-Своя сборка «Airstrike Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Incoming, Distant
-Horizons, шейдеры, запись повторов. Что в ней и как её ставить — README.md. Мод — https://github.com/zentixua/incoming,
+Своя сборка «Open Skies» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Incoming, Distant
+Horizons, шейдеры, запись повторов, на сервере — Almighty. Что в ней и как её ставить — README.md. Мод — https://github.com/zentixua/incoming,
 мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
 
 ## Люди и правила
@@ -15,7 +15,7 @@ Horizons, шейдеры, запись повторов. Что в ней и к�
 - Версию (`version` в `pack.toml`) поднимать при каждом изменении состава и строку в таблицу версий README.md:
   у всех игроков один набор.
 - Выпуск на GitHub — сам: новая `version` на `main` выходит релизом `v<version>` (скачивание без входа по
-  `releases/latest/download/Airstrike-Pack.zip` и `…/Airstrike-Pack.mrpack`).
+  `releases/latest/download/Open-Skies.zip` и `…/Open-Skies.mrpack`).
   Остальные публичные шаги (Modrinth и др.) — только по прямому слову Артёма.
 - Готовый PR вливать самому после зелёного CI, чистого независимого ревью и вердикта координатора.
 
@@ -23,12 +23,14 @@ Horizons, шейдеры, запись повторов. Что в ней и к�
 ```
 pack/                    ← сама сборка: pack.toml (версии игры и NeoForge), index.toml, mods/*.pw.toml и
                            shaderpacks/*.pw.toml (откуда скачать и хеш), config/ (кладётся в игру как есть)
-tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Airstrike-Pack.zip)
+tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Open-Skies.zip)
 tools/pack_dir.py        ← каталог игры из pack/ без Prism (моды по хешам) — для проверок клиентом Incoming
-.github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт airstrike-pack);
+.github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт open-skies);
                                новая version на main — релиз v<version> с ними (заметки — строка README «Версии»)
 ```
-Адрес сборки для packwiz-installer: `https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`.
+Адрес сборки для packwiz-installer: `https://raw.githubusercontent.com/zentixua/open-skies/main/pack/pack.toml`;
+экземпляры, поставленные под прежним именем сборки (Airstrike Pack), берут её по старому адресу
+`zentixua/airstrike-pack/…` — GitHub отдаёт его, пока у zentixua нет репозитория с этим именем (имя не занимать).
 Сборка лежит в `pack/`, а не в корне: файлы репозитория (README, CI, инструменты) не попадают в индекс и в игру.
 
 ## Рабочий цикл
@@ -37,7 +39,7 @@ go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
 cd pack && packwiz update <имя>           # мод с Modrinth; точная версия — packwiz modrinth add --project-id … --version-id …
 cd pack && packwiz refresh                # индекс с хешами — тем же коммитом (CI проверяет)
 cd pack && packwiz mr export              # .mrpack — разовая установка без автообновления
-python3 tools/prism_instance.py           # dist/Airstrike-Pack.zip — новый экземпляр с автообновлением
+python3 tools/prism_instance.py           # dist/Open-Skies.zip — новый экземпляр с автообновлением
 ```
 Новый выпуск Incoming: `packwiz url add Incoming https://github.com/zentixua/incoming/releases/download/v<версия>/incoming-<версия>.jar --meta-name incoming`;
 Almighty — так же, `almighty-<версия>.jar` из выпуска https://github.com/zentixua/almighty, `side = "server"`.
@@ -55,4 +57,4 @@ Almighty — так же, `almighty-<версия>.jar` из выпуска http
   экземпляра. Переименование репозитория GitHub адрес не ломает: raw.githubusercontent.com отдаёт файлы и по старому
   имени.
 - Экземпляр с другим адресом в «Предстартовой команде» сборку с `main` не получает — его ставят заново из
-  `Airstrike-Pack.zip`.
+  `Open-Skies.zip`.

@@ -1,4 +1,4 @@
-# Сборка «Airstrike Pack» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются — .mrpack и экземпляр Prism,
+# Сборка «Open Skies» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются — .mrpack и экземпляр Prism,
 # который ставит сборку с main сам при каждом запуске (tools/prism_instance.py); оба — в артефактах запуска.
 # Новая version в pack.toml на main выходит сама: релиз v<version> с этими файлами под постоянными именами, их
 # последняя версия скачивается без входа по releases/latest/download/<имя>.
@@ -56,10 +56,10 @@ jobs:
       # имена без версии: у релиза releases/latest/download/<имя> всегда ведёт к последней сборке; Prism называет
       # экземпляр по имени файла (пробел в имени файла выпуска GitHub заменил бы точкой)
       - name: Файл для лаунчера
-        run: packwiz mr export -o Airstrike-Pack.mrpack
+        run: packwiz mr export -o Open-Skies.mrpack
 
       - name: Экземпляр Prism с автообновлением
-        run: python3 ../tools/prism_instance.py Airstrike-Pack.zip
+        run: python3 ../tools/prism_instance.py Open-Skies.zip
 
       # заметки релиза — и на PR: новая версия без строки в «Версиях» README.md не дойдёт до main
       - name: Заметки релиза
@@ -71,25 +71,25 @@ jobs:
           [ -n "$row" ] || { echo "README.md: нет строки версии $V в «Версиях»"; exit 1; }
           mod=${row%%$'\t'*}
           changes=${row#*$'\t'}
-          changes=${changes//](#/](https://github.com/zentixua/airstrike-pack#}  # якоря README — в заметках полной ссылкой
+          changes=${changes//](#/](https://github.com/zentixua/open-skies#}  # якоря README — в заметках полной ссылкой
           mc=$(sed -n 's/^minecraft = "\(.*\)"$/\1/p' pack.toml)
           neoforge=$(sed -n 's/^neoforge = "\(.*\)"$/\1/p' pack.toml)
           cat > release-notes.md <<EOF
           Minecraft $mc, NeoForge $neoforge, Incoming $mod. $changes
 
           ## Установка
-          - \`Airstrike-Pack.zip\` — экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку перед каждым запуском игры: «Добавить экземпляр…» → «Импорт» → этот файл.
-          - \`Airstrike-Pack.mrpack\` — разовая установка этой версии без автообновления: импорт в Prism Launcher или Modrinth App.
+          - \`Open-Skies.zip\` — экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку перед каждым запуском игры: «Добавить экземпляр…» → «Импорт» → этот файл.
+          - \`Open-Skies.mrpack\` — разовая установка этой версии без автообновления: импорт в Prism Launcher или Modrinth App.
 
-          Подробно — [README](https://github.com/zentixua/airstrike-pack#установка).
+          Подробно — [README](https://github.com/zentixua/open-skies#установка).
           EOF
 
       - uses: actions/upload-artifact@v6
         with:
-          name: airstrike-pack
+          name: open-skies
           path: |
-            pack/Airstrike-Pack.mrpack
-            pack/Airstrike-Pack.zip
+            pack/Open-Skies.mrpack
+            pack/Open-Skies.zip
             pack/release-notes.md
           if-no-files-found: error
 
@@ -120,11 +120,11 @@ jobs:
       - uses: actions/download-artifact@v7
         if: steps.exists.outputs.yes != 'true'
         with:
-          name: airstrike-pack
+          name: open-skies
           path: dist
 
       - name: Релиз
         if: steps.exists.outputs.yes != 'true'
         run: |
-          gh release create "v$V" dist/Airstrike-Pack.zip dist/Airstrike-Pack.mrpack --target "$GITHUB_SHA" \
-            --title "Airstrike Pack $V" --notes-file dist/release-notes.md --latest
+          gh release create "v$V" dist/Open-Skies.zip dist/Open-Skies.mrpack --target "$GITHUB_SHA" \
+            --title "Open Skies $V" --notes-file dist/release-notes.md --latest
