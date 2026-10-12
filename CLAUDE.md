@@ -1,9 +1,11 @@
-# Airstrike Pack — сборка NeoForge 1.21.1 под мод Airstrike
+# Incoming Pack — сборка NeoForge 1.21.1 под мод Incoming (прежде Airstrike Pack и Airstrike)
 
-Своя сборка «Airstrike Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Airstrike, Distant
-Horizons, шейдеры, запись повторов. Что в ней и как её ставить — README.md. Репозиторий выделен из zentixua/airstrike
-вместе с историей: номера PR до переезда — `zentixua/airstrike#N`. Мод — https://github.com/zentixua/airstrike,
-мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
+Своя сборка «Incoming Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Incoming, Distant
+Horizons, шейдеры, запись повторов. Публичные имена — Incoming Pack и Incoming с 0.1.24 (решение Артёма 12.10.2026);
+репозитории, адрес сборки, id мода `airstrike`, jar `airstrike-<версия>.jar` и `mods/airstrike.pw.toml` — прежние.
+Что в ней и как её ставить — README.md (по-английски) и README.ru.md (русский перевод). Репозиторий выделен из
+zentixua/airstrike вместе с историей: номера PR до переезда — `zentixua/airstrike#N`. Мод —
+https://github.com/zentixua/airstrike, мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
 
 ## Люди и правила
 - Автор/хост: **Артём** (GitHub zentixua, в игре ZentixUA). Друзья: **ENOTzRPG**, **WallyFillmark**. Общаемся
@@ -11,23 +13,28 @@ Horizons, шейдеры, запись повторов. Что в ней и к�
 - **`pack/` на `main` — живая сборка**: экземпляры игроков с автообновлением (Prism, packwiz-installer перед каждым
   запуском) и выделенный сервер ставят её с `main` при следующем запуске. В `main` — только проверенное CI и только jar
   из уже вышедших выпусков (PR сборки — после выпуска мода).
+- Публичные тексты — по-английски: README.md, docs/store (поля и описание для Modrinth и CurseForge), заметки релиза,
+  описания необязательных модов; README.ru.md — русский перевод, правится в том же PR. Пишем как человек: просто,
+  точно, без рекламных слов, повторов и воды; каждое утверждение сверено с файлами сборки.
 - Сборка чистая и надёжная: стандартные механизмы, без обходов; настройки чужих модов — по умолчанию, а каждый файл
-  в `config/` — с причиной в README.md. Новый обязательный мод — только по слову Артёма.
-- Версию (`version` в `pack.toml`) поднимать при каждом изменении состава и строку в таблицу версий README.md:
-  у всех игроков один набор.
+  в `config/` — с причиной в README.md и README.ru.md. Новый обязательный мод — только по слову Артёма.
+- Версию (`version` в `pack.toml`) поднимать при каждом изменении состава и строку в таблицу `## Versions` README.md
+  (по-английски; таблица только там, README.ru.md на неё ссылается): у всех игроков один набор.
 - Выпуск на GitHub — сам: новая `version` на `main` выходит релизом `v<version>` (Артём, 09.10.2026: «нормально сборку
-  опубликуй» — скачивание без входа по `releases/latest/download/Airstrike-Pack.zip` и `…/Airstrike-Pack.mrpack`).
-  Остальные публичные шаги (Modrinth и др.) — только по прямому слову Артёма.
+  опубликуй» — скачивание без входа по `releases/latest/download/…`; с 0.1.24 файлы — `Incoming-Pack.zip` и
+  `Incoming-Pack.mrpack`, до того — `Airstrike-Pack.*`). Остальные публичные шаги (Modrinth и др.) — только по прямому
+  слову Артёма.
 - Готовый PR вливать самому после зелёного CI, чистого независимого ревью и вердикта координатора.
 
 ## Где что лежит
 ```
 pack/                    ← сама сборка: pack.toml (версии игры и NeoForge), index.toml, mods/*.pw.toml и
                            shaderpacks/*.pw.toml (откуда скачать и хеш), config/ (кладётся в игру как есть)
-tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Airstrike-Pack.zip)
+tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Incoming-Pack.zip)
 tools/pack_dir.py        ← каталог игры из pack/ без Prism (моды по хешам) — для проверок клиентом Airstrike
 .github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт airstrike-pack);
-                               новая version на main — релиз v<version> с ними (заметки — строка README «Версии»)
+                               новая version на main — релиз v<version> с ними (заметки — строка README.md
+                               в разделе «## Versions»)
 ```
 Адрес сборки для packwiz-installer: `https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml`.
 Сборка лежит в `pack/`, а не в корне: файлы репозитория (README, CI, инструменты) не попадают в индекс и в игру.
@@ -38,9 +45,9 @@ go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
 cd pack && packwiz update <имя>           # мод с Modrinth; точная версия — packwiz modrinth add --project-id … --version-id …
 cd pack && packwiz refresh                # индекс с хешами — тем же коммитом (CI проверяет)
 cd pack && packwiz mr export              # .mrpack — разовая установка без автообновления
-python3 tools/prism_instance.py           # dist/Airstrike-Pack.zip — новый экземпляр с автообновлением
+python3 tools/prism_instance.py           # dist/Incoming-Pack.zip — новый экземпляр с автообновлением
 ```
-Новый выпуск Airstrike: `packwiz url add Airstrike https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`;
+Новый выпуск Incoming: `packwiz url add Incoming https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`;
 Almighty — так же, `almighty-<версия>.jar` из выпуска https://github.com/zentixua/almighty, `side = "server"`.
 
 ## Подводные камни

@@ -14,4 +14,4 @@ version = "4GVMYcai"
 
 [option]
 optional = true
-description = "Запись и повтор (Flashback): нужно только тем, кто снимает"
+description = "Recording and replays (Flashback). Only needed if you record videos."

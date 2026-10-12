@@ -1,12 +1,13 @@
-name = "Airstrike Pack"
+name = "Incoming Pack"
 author = "zentixua"
-version = "0.1.23"
+version = "0.1.24"
+description = "NeoForge 1.21.1 modpack built around the Incoming mod, with Create, Create Aeronautics, aircraft and weapon mods, Distant Horizons and shaders."
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "e9d07bcd1a2b8f0acc06a1bc2fa26c424345094a405998982dc4238d80d49d96"
+hash = "b5001e6d4f55fd692535268513ab89a41058f471795ff4e346d740985ff73ec7"
 
 [versions]
 minecraft = "1.21.1"

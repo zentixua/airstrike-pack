@@ -1,4 +1,4 @@
-# Сборка «Airstrike Pack» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются — .mrpack и экземпляр Prism,
+# Сборка «Incoming Pack», прежде «Airstrike Pack» (pack/, packwiz): индекс свежий, файлы для лаунчера собираются — .mrpack и экземпляр Prism,
 # который ставит сборку с main сам при каждом запуске (tools/prism_instance.py); оба — в артефактах запуска.
 # Новая version в pack.toml на main выходит сама: релиз v<version> с этими файлами под постоянными именами, их
 # последняя версия скачивается без входа по releases/latest/download/<имя>.
@@ -56,40 +56,41 @@ jobs:
       # имена без версии: у релиза releases/latest/download/<имя> всегда ведёт к последней сборке; Prism называет
       # экземпляр по имени файла (пробел в имени файла выпуска GitHub заменил бы точкой)
       - name: Файл для лаунчера
-        run: packwiz mr export -o Airstrike-Pack.mrpack
+        run: packwiz mr export -o Incoming-Pack.mrpack
 
       - name: Экземпляр Prism с автообновлением
-        run: python3 ../tools/prism_instance.py Airstrike-Pack.zip
+        run: python3 ../tools/prism_instance.py Incoming-Pack.zip
 
-      # заметки релиза — и на PR: новая версия без строки в «Версиях» README.md не дойдёт до main
+      # заметки релиза — и на PR: новая версия без строки в «Versions» README.md не дойдёт до main
       - name: Заметки релиза
         env:
           V: ${{ steps.version.outputs.version }}
         run: |
-          # строка версии из таблицы «Версии» README.md: | версия | Airstrike | что изменилось |
-          row=$(awk -F ' [|] ' -v v="$V" '$1 == "| " v { print $2 "\t" substr($3, 1, length($3) - 2) }' ../README.md)
-          [ -n "$row" ] || { echo "README.md: нет строки версии $V в «Версиях»"; exit 1; }
+          # строка версии из таблицы раздела «## Versions» README.md: | version | Incoming | changes |
+          row=$(awk -F ' [|] ' -v v="$V" '/^## / { s = ($0 == "## Versions") }
+            s && $1 == "| " v { print $2 "\t" substr($3, 1, length($3) - 2) }' ../README.md)
+          [ -n "$row" ] || { echo "README.md: нет строки версии $V в «## Versions»"; exit 1; }
           airstrike=${row%%$'\t'*}
           changes=${row#*$'\t'}
           changes=${changes//](#/](https://github.com/zentixua/airstrike-pack#}  # якоря README — в заметках полной ссылкой
           mc=$(sed -n 's/^minecraft = "\(.*\)"$/\1/p' pack.toml)
           neoforge=$(sed -n 's/^neoforge = "\(.*\)"$/\1/p' pack.toml)
           cat > release-notes.md <<EOF
-          Minecraft $mc, NeoForge $neoforge, Airstrike $airstrike. $changes
+          Minecraft $mc, NeoForge $neoforge, Incoming $airstrike. $changes
 
-          ## Установка
-          - \`Airstrike-Pack.zip\` — экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку перед каждым запуском игры: «Добавить экземпляр…» → «Импорт» → этот файл.
-          - \`Airstrike-Pack.mrpack\` — разовая установка этой версии без автообновления: импорт в Prism Launcher или Modrinth App.
+          ## Installation
+          - \`Incoming-Pack.zip\`: a [Prism Launcher](https://prismlauncher.org/download/) instance that updates the pack before every game start. In Prism: Add Instance → Import → this file.
+          - \`Incoming-Pack.mrpack\`: a one-time install of this version without automatic updates. Import it in Prism Launcher or the Modrinth App.
 
-          Подробно — [README](https://github.com/zentixua/airstrike-pack#установка).
+          Details: [README](https://github.com/zentixua/airstrike-pack#installation).
           EOF
 
       - uses: actions/upload-artifact@v6
         with:
           name: airstrike-pack
           path: |
-            pack/Airstrike-Pack.mrpack
-            pack/Airstrike-Pack.zip
+            pack/Incoming-Pack.mrpack
+            pack/Incoming-Pack.zip
             pack/release-notes.md
           if-no-files-found: error
 
@@ -126,5 +127,5 @@ jobs:
       - name: Релиз
         if: steps.exists.outputs.yes != 'true'
         run: |
-          gh release create "v$V" dist/Airstrike-Pack.zip dist/Airstrike-Pack.mrpack --target "$GITHUB_SHA" \
-            --title "Airstrike Pack $V" --notes-file dist/release-notes.md --latest
+          gh release create "v$V" dist/Incoming-Pack.zip dist/Incoming-Pack.mrpack --target "$GITHUB_SHA" \
+            --title "Incoming Pack $V" --notes-file dist/release-notes.md --latest

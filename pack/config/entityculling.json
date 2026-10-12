@@ -24,7 +24,8 @@
     "airstrike:icbm",
     "airstrike:launcher",
     "airstrike:spent_booster",
-    "airstrike:debris"
+    "airstrike:debris",
+    "airstrike:interceptor"
   ],
   "tracingDistance": 128,
   "debugMode": false,

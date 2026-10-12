@@ -15,4 +15,4 @@ version = "9w34y8ai"
 [option]
 optional = true
 default = true
-description = "Дальняя прорисовка (Distant Horizons). На macOS снять галочку: DH 3.3.3 портит память с драйвером OpenGL от Apple, и игра падает"
+description = "Distant Horizons: draws terrain far beyond the normal view distance. Untick on macOS: DH 3.3.3 corrupts memory with the Apple OpenGL driver and the game crashes."
