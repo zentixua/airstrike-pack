@@ -134,11 +134,11 @@ key_key.aeroworks.joystick.free_camera:key.keyboard.left.shift:
 key_key.aero_cam_sync.toggle:key.keyboard.i:
 key_key.aero_cam_sync.open_config:key.keyboard.unknown:
 key_key.aero_cam_sync.add_mainhand_item_client:key.keyboard.unknown:
-key_key.airstrike.fire:key.mouse.left:
-key_key.airstrike.menu:key.keyboard.unknown:
-key_key.airstrike.map:key.keyboard.comma:
-key_key.airstrike.camera:key.keyboard.n:
-key_key.airstrike.second_key:key.keyboard.period:
+key_key.incoming.fire:key.mouse.left:
+key_key.incoming.menu:key.keyboard.unknown:
+key_key.incoming.map:key.keyboard.comma:
+key_key.incoming.camera:key.keyboard.n:
+key_key.incoming.second_key:key.keyboard.period:
 key_key.entityculling.toggle:key.keyboard.unknown:
 key_flashback.keybind.create_marker_1:key.keyboard.unknown:
 key_flashback.keybind.create_marker_2:key.keyboard.unknown:

@@ -66,16 +66,16 @@ jobs:
         env:
           V: ${{ steps.version.outputs.version }}
         run: |
-          # строка версии из таблицы «Версии» README.md: | версия | Airstrike | что изменилось |
+          # строка версии из таблицы «Версии» README.md: | версия | мод | что изменилось |
           row=$(awk -F ' [|] ' -v v="$V" '$1 == "| " v { print $2 "\t" substr($3, 1, length($3) - 2) }' ../README.md)
           [ -n "$row" ] || { echo "README.md: нет строки версии $V в «Версиях»"; exit 1; }
-          airstrike=${row%%$'\t'*}
+          mod=${row%%$'\t'*}
           changes=${row#*$'\t'}
           changes=${changes//](#/](https://github.com/zentixua/airstrike-pack#}  # якоря README — в заметках полной ссылкой
           mc=$(sed -n 's/^minecraft = "\(.*\)"$/\1/p' pack.toml)
           neoforge=$(sed -n 's/^neoforge = "\(.*\)"$/\1/p' pack.toml)
           cat > release-notes.md <<EOF
-          Minecraft $mc, NeoForge $neoforge, Airstrike $airstrike. $changes
+          Minecraft $mc, NeoForge $neoforge, Incoming $mod. $changes
 
           ## Установка
           - \`Airstrike-Pack.zip\` — экземпляр [Prism Launcher](https://prismlauncher.org/download/), который сам обновляет сборку перед каждым запуском игры: «Добавить экземпляр…» → «Импорт» → этот файл.
