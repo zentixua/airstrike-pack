@@ -25,7 +25,7 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACK = os.path.join(ROOT, "pack")
-USER_AGENT = "zentixua/airstrike-pack tools/pack_dir.py"
+USER_AGENT = "zentixua/open-skies tools/pack_dir.py"
 
 
 def digest(path, algo):

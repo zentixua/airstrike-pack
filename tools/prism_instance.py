@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Экземпляр Prism Launcher со сборкой pack/, которая обновляется сама при каждом запуске игры.
 
-  tools/prism_instance.py [dist/Airstrike-Pack.zip]
+  tools/prism_instance.py [dist/Open-Skies.zip]
 
 В архиве — пустой экземпляр (Minecraft и NeoForge из pack.toml, память как в инструкции для друзей) и
 packwiz-installer-bootstrap в папке игры, а команда перед запуском экземпляра — packwiz-installer со сборкой
@@ -21,7 +21,7 @@ import urllib.request
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PACK_URL = "https://raw.githubusercontent.com/zentixua/airstrike-pack/main/pack/pack.toml"
+PACK_URL = "https://raw.githubusercontent.com/zentixua/open-skies/main/pack/pack.toml"
 BOOTSTRAP = "packwiz-installer-bootstrap.jar"
 BOOTSTRAP_URL = f"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/{BOOTSTRAP}"
 BOOTSTRAP_SHA256 = "a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d116c"
@@ -29,7 +29,7 @@ BOOTSTRAP_SHA256 = "a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d
 MAX_MEMORY_MB = 6144
 # компоненты Prism (mmc-pack.json) по ключам [versions] в pack.toml — те же, что сверяет packwiz-installer
 COMPONENTS = {"minecraft": "net.minecraft", "neoforge": "net.neoforged"}
-USER_AGENT = "zentixua/airstrike-pack tools/prism_instance.py"
+USER_AGENT = "zentixua/open-skies tools/prism_instance.py"
 
 
 def ini_value(s):
@@ -39,7 +39,7 @@ def ini_value(s):
 
 def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("out", nargs="?", default=os.path.join(ROOT, "dist", "Airstrike-Pack.zip"))
+    ap.add_argument("out", nargs="?", default=os.path.join(ROOT, "dist", "Open-Skies.zip"))
     a = ap.parse_args()
 
     with open(os.path.join(ROOT, "pack", "pack.toml"), "rb") as f:
