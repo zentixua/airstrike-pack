@@ -41,7 +41,7 @@ metafile = true
 
 [[files]]
 file = "mods/almighty.pw.toml"
-hash = "331c14df7a13dedf2eb4ee47c6db787d73780bd99af61d4fdc315704681ba888"
+hash = "1a9f78e0a8d80ac8b0c5c5896d15fc63401d928ce7adee877e7ea1b01cdaf578"
 metafile = true
 
 [[files]]
@@ -191,7 +191,7 @@ metafile = true
 
 [[files]]
 file = "mods/incoming.pw.toml"
-hash = "ddac2d4fe846731d39e7a2c7fe3a6b170f35538064ad45e3386dc8d730566d96"
+hash = "8c5c9b79b6b3f5dfaa1d128748288f674208e08b2bf1d4e140c5a998a9f305d1"
 metafile = true
 
 [[files]]

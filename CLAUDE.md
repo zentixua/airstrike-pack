@@ -1,9 +1,8 @@
-# Airstrike Pack — сборка NeoForge 1.21.1 под мод Incoming (до 3.0.0 — Airstrike)
+# Airstrike Pack — сборка NeoForge 1.21.1 под мод Incoming
 
 Своя сборка «Airstrike Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Incoming, Distant
-Horizons, шейдеры, запись повторов. Что в ней и как её ставить — README.md. Репозиторий выделен из zentixua/airstrike
-вместе с историей: номера PR до переезда — `zentixua/airstrike#N`. Мод — https://github.com/zentixua/incoming (до 3.0.0
-— Airstrike, zentixua/airstrike), мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
+Horizons, шейдеры, запись повторов. Что в ней и как её ставить — README.md. Мод — https://github.com/zentixua/incoming,
+мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
 
 ## Люди и правила
 - Автор/хост: **Артём** (GitHub zentixua, в игре ZentixUA). Друзья: **ENOTzRPG**, **WallyFillmark**. Общаемся
@@ -15,8 +14,8 @@ Horizons, шейдеры, запись повторов. Что в ней и к�
   в `config/` — с причиной в README.md. Новый обязательный мод — только по слову Артёма.
 - Версию (`version` в `pack.toml`) поднимать при каждом изменении состава и строку в таблицу версий README.md:
   у всех игроков один набор.
-- Выпуск на GitHub — сам: новая `version` на `main` выходит релизом `v<version>` (Артём, 09.10.2026: «нормально сборку
-  опубликуй» — скачивание без входа по `releases/latest/download/Airstrike-Pack.zip` и `…/Airstrike-Pack.mrpack`).
+- Выпуск на GitHub — сам: новая `version` на `main` выходит релизом `v<version>` (скачивание без входа по
+  `releases/latest/download/Airstrike-Pack.zip` и `…/Airstrike-Pack.mrpack`).
   Остальные публичные шаги (Modrinth и др.) — только по прямому слову Артёма.
 - Готовый PR вливать самому после зелёного CI, чистого независимого ревью и вердикта координатора.
 
@@ -54,6 +53,6 @@ Almighty — так же, `almighty-<версия>.jar` из выпуска http
 - Путь в индексе не выходит за `pack/` (packwiz-installer отбрасывает лишние `..`), а `pack.toml` несёт хеш индекса:
   сборку нельзя перенаправить на другой адрес содержимым файлов — новый адрес вписывается в «Предстартовую команду»
   экземпляра. Переименование репозитория GitHub адрес не ломает: raw.githubusercontent.com отдаёт файлы и по старому
-  имени (проверено 04.10.2026).
-- Прежний адрес `zentixua/airstrike/main/pack/pack.toml` (замороженная копия в репозитории мода) убран по слову Артёма
-  в zentixua/incoming#256: экземпляр с ним не обновляется — поставить заново из `Airstrike-Pack.zip`.
+  имени.
+- Экземпляр с другим адресом в «Предстартовой команде» сборку с `main` не получает — его ставят заново из
+  `Airstrike-Pack.zip`.
