@@ -1,9 +1,9 @@
-# Airstrike Pack — сборка NeoForge 1.21.1 под мод Airstrike
+# Airstrike Pack — сборка NeoForge 1.21.1 под мод Incoming (до 3.0.0 — Airstrike)
 
-Своя сборка «Airstrike Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Airstrike, Distant
+Своя сборка «Airstrike Pack» в [packwiz](https://packwiz.infra.link/): Create, Create Aeronautics, Incoming, Distant
 Horizons, шейдеры, запись повторов. Что в ней и как её ставить — README.md. Репозиторий выделен из zentixua/airstrike
-вместе с историей: номера PR до переезда — `zentixua/airstrike#N`. Мод — https://github.com/zentixua/airstrike,
-мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
+вместе с историей: номера PR до переезда — `zentixua/airstrike#N`. Мод — https://github.com/zentixua/incoming (до 3.0.0
+— Airstrike, zentixua/airstrike), мост ведущего Almighty (только сервер) — https://github.com/zentixua/almighty.
 
 ## Люди и правила
 - Автор/хост: **Артём** (GitHub zentixua, в игре ZentixUA). Друзья: **ENOTzRPG**, **WallyFillmark**. Общаемся
@@ -25,7 +25,7 @@ Horizons, шейдеры, запись повторов. Что в ней и к�
 pack/                    ← сама сборка: pack.toml (версии игры и NeoForge), index.toml, mods/*.pw.toml и
                            shaderpacks/*.pw.toml (откуда скачать и хеш), config/ (кладётся в игру как есть)
 tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Airstrike-Pack.zip)
-tools/pack_dir.py        ← каталог игры из pack/ без Prism (моды по хешам) — для проверок клиентом Airstrike
+tools/pack_dir.py        ← каталог игры из pack/ без Prism (моды по хешам) — для проверок клиентом Incoming
 .github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт airstrike-pack);
                                новая version на main — релиз v<version> с ними (заметки — строка README «Версии»)
 ```
@@ -40,7 +40,7 @@ cd pack && packwiz refresh                # индекс с хешами — т�
 cd pack && packwiz mr export              # .mrpack — разовая установка без автообновления
 python3 tools/prism_instance.py           # dist/Airstrike-Pack.zip — новый экземпляр с автообновлением
 ```
-Новый выпуск Airstrike: `packwiz url add Airstrike https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`;
+Новый выпуск Incoming: `packwiz url add Incoming https://github.com/zentixua/incoming/releases/download/v<версия>/incoming-<версия>.jar --meta-name incoming`;
 Almighty — так же, `almighty-<версия>.jar` из выпуска https://github.com/zentixua/almighty, `side = "server"`.
 
 ## Подводные камни
@@ -55,5 +55,5 @@ Almighty — так же, `almighty-<версия>.jar` из выпуска http
   сборку нельзя перенаправить на другой адрес содержимым файлов — новый адрес вписывается в «Предстартовую команду»
   экземпляра. Переименование репозитория GitHub адрес не ломает: raw.githubusercontent.com отдаёт файлы и по старому
   имени (проверено 04.10.2026).
-- Прежний адрес `zentixua/airstrike/main/pack/pack.toml` отдаёт сборку, замороженную на переезде, пока все экземпляры
-  (игроки и сервер) не переведены на новый; убирать его — только по слову Артёма.
+- Прежний адрес `zentixua/airstrike/main/pack/pack.toml` (замороженная копия в репозитории мода) убран по слову Артёма
+  в zentixua/incoming#256: экземпляр с ним не обновляется — поставить заново из `Airstrike-Pack.zip`.

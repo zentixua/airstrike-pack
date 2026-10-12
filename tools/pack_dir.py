@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Каталог игры из сборки pack/ (packwiz) — без Prism и без packwiz: для проверок клиентом prod_client.py Airstrike.
+"""Каталог игры из сборки pack/ (packwiz) — без Prism и без packwiz: для проверок клиентом prod_client.py Incoming.
 
   tools/pack_dir.py ../airstrike/mod/run/pack-b [--optional]
-  (в zentixua/airstrike) tools/prod_client.py <сценарий> --no-copy --dir mod/run/pack-b
+  (в zentixua/incoming) tools/prod_client.py <сценарий> --no-copy --dir mod/run/pack-b
                                                             (сборку мода со сценариями кладёт prod_client.py)
 
 Те же файлы, что ставит Prism из .mrpack сборки: моды и шейдерпаки по `*.pw.toml` (скачанный файл сверяется с хешем

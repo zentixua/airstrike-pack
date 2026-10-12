@@ -1,6 +1,7 @@
 # Airstrike Pack
 
-Своя сборка под Airstrike: NeoForge 1.21.1, Create, Create Aeronautics, Distant Horizons, шейдеры и запись повторов.
+Своя сборка под мод Incoming (до версии 3.0.0 — Airstrike): NeoForge 1.21.1, Create, Create Aeronautics, Distant
+Horizons, шейдеры и запись повторов.
 Без контента не по теме: оружие и техника, Create для построек и аппаратов, всё лишнее для такой игры не берём.
 
 Сборка описана файлами [packwiz](https://packwiz.infra.link/): `pack.toml` (версии игры и NeoForge), `mods/*.pw.toml` и
@@ -45,7 +46,8 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 Экземпляр, который ставил сборку из прежнего адреса (`zentixua/airstrike/main/pack/pack.toml`, до переезда сборки в
 этот репозиторий), переводится один раз: «Изменить…» → «Параметры» → «Пользовательские команды» → в «Предстартовой
 команде» заменить `zentixua/airstrike/main/pack/pack.toml` на `zentixua/airstrike-pack/main/pack/pack.toml`. Моды и миры
-остаются; прежний адрес отдаёт ту же сборку без новых версий, пока его не уберут.
+остаются. Прежний адрес убран вместе с копией сборки в репозитории мода (zentixua/incoming#256): экземпляр, который
+его ещё не перевёл, проще поставить заново из `Airstrike-Pack.zip`.
 
 `mods` в сторону — потому что удаляет packwiz-installer только то, что ставил сам: jar старой версии сборки с другим
 именем (`airstrike-2.5.0.jar` у 0.1.0) остался бы рядом с новым, и игра не запустилась бы с двумя Airstrike. Файлы
@@ -66,7 +68,7 @@ cd pack && packwiz mr export      # → Airstrike Pack-<версия>.mrpack
 
 | группа | моды |
 |---|---|
-| основа | Create, Sable, Create Aeronautics, Airstrike (jar выпуска с GitHub), Distant Horizons (по выбору, включён) |
+| основа | Create, Sable, Create Aeronautics, Incoming (jar выпуска с GitHub), Distant Horizons (по выбору, включён) |
 | производительность | Sodium, Sodium Extra, Reese's Sodium Options, Iris, Colorwheel, Lithium, FerriteCore, ModernFix, ImmediatelyFast, Entity Culling, More Culling (+ Cloth Config), Dynamic FPS |
 | Create | Propulsion: Simulated, Aeroworks, Tweaked Controllers, Big Cannons (+ RPL), Connected, Deco, Diesel Generators, Aeronautics Hot Air Fix |
 | авиация и оружие | Immersive Aircraft, Man of Many Planes, Vic's Point Blank (+ GeckoLib), Point Blank Aeronautics compat |
@@ -117,10 +119,10 @@ Distant Horizons на macOS (Apple Silicon) выключать: DH 3.3.3 зап�
 необязательные (`PayloadRegistrar.optional()`).
 
 Настройки, которые сборка кладёт сама:
-- `config/entityculling.json` — значения Entity Culling по умолчанию плюс сущности Airstrike в `entityWhitelist`: такие
+- `config/entityculling.json` — значения Entity Culling по умолчанию плюс сущности Incoming в `entityWhitelist`: такие
   сущности мод не прячет и не останавливает их тик на клиенте (в 1.11.3 этот список действует на оба). Факел снаряда
   рисуется вместе с моделью, а шлейф, облако пуска и дым горящих обломков рождаются в тике сущности на клиенте
-  (`AirstrikeClient.entityTick`): без исключения снаряд за холмом или за спиной игрока терял бы факел и рвал шлейф.
+  (`IncomingClient.entityTick`): без исключения снаряд за холмом или за спиной игрока терял бы факел и рвал шлейф.
 - `config/aero_cam_sync-client.toml` — значения Aeronautics Camera Sync по умолчанию и `configSchemaVersion = 5`.
   Версия 1.4.0 сама пишет новый файл с версией схемы 0, а на следующем запуске считает его устаревшим и вместо
   главного меню открывает вопрос «Config Reset» (`ConfigMigrationManager`: файл был и схема меньше 5) — до первого
@@ -135,7 +137,7 @@ Distant Horizons на macOS (Apple Silicon) выключать: DH 3.3.3 зап�
 - `config/servercore/config.yml`, `optimizations.yml` — значения ServerCore 1.5.19 по умолчанию, кроме двух. Дальность
   активации (`activation-range`, как у Paper) включена: мобы и стойки для брони дальше 16–48 блоков от игроков тикают
   раз в 20 тиков, пока их ничто не будит (падают, в воде, их бьют, у них цель). Всё, что не моб и не стойка (снаряды
-  Airstrike, контрапции Create, самолёты, снаряды пушек, предметы), из проверок исключено: тип по умолчанию —
+  Incoming, контрапции Create, самолёты, снаряды пушек, предметы), из проверок исключено: тип по умолчанию —
   `tick-interval: 1`. Динамика (`dynamic`) включена: когда тик дольше 35 мс, сервер на время сужает дальность тика
   чанков и симуляции до 6 чанков и лимит мобов до 50 %, а когда нагрузка спадает, возвращает 8 чанков и 100 %
   (8 — дальность симуляции сервера, `server.properties`); дальность прорисовки не трогает. Замер 06.10.2026 на копии Project Zearth (6 игроков в разных городах, ночь):
@@ -158,7 +160,7 @@ NeoForge запускает все действия на нажатой клав
 
 | клавиша | действие |
 |---|---|
-| ЛКМ | атака; в бинокле пульта — пуск (Airstrike); на лафете — выстрел пушки (Big Cannons) |
+| ЛКМ | атака; в бинокле пульта — пуск (Incoming); на лафете — выстрел пушки (Big Cannons) |
 | R | перезарядка (Point Blank); у пульта Tweaked Controllers — мышь в центр |
 | B, V, Y | режим огня, смена прицела, обвесы (Point Blank); Alt+Y — его настройки |
 | G | блок, пока в руках оружие и ПКМ занят прицелом (Point Blank) |
@@ -172,7 +174,7 @@ NeoForge запускает все действия на нажатой клав
 | Tab | список игроков; с творческим посохом физики — вращение (так написано в его подсказке) |
 | M, ], [ | карта мира, её настройки, настройки мини-карты (было Y) |
 | U, J, Z, Num + | список меток, новая метка (было B), большая мини-карта, метка на месте (Xaero) |
-| N, «,», «.» | камера снаряда, карта наведения, второй ключ (Airstrike) |
+| N, «,», «.» | камера снаряда, карта наведения, второй ключ (Incoming) |
 | I | наклон камеры вместе с аппаратом (Aeronautics Camera Sync) |
 | K, O | шейдеры вкл/выкл, выбор шейдеров (Iris) |
 | Shift, Num 0, Num 1 | подробности, настройки и показ подсказки Jade |
@@ -196,7 +198,7 @@ Default Options — только у игроков. Его библиотека 
 
 - Мод с Modrinth: `packwiz update <имя>` (или `packwiz modrinth add --project-id <slug> --version-id <id>` — точная
   версия), потом `packwiz refresh`. CI проверяет, что `index.toml` свежий.
-- Новый выпуск Airstrike: `packwiz url add Airstrike https://github.com/zentixua/airstrike/releases/download/v<версия>/airstrike-<версия>.jar --meta-name airstrike`.
+- Новый выпуск Incoming: `packwiz url add Incoming https://github.com/zentixua/incoming/releases/download/v<версия>/incoming-<версия>.jar --meta-name incoming`.
 - Версию сборки (`version` в `pack.toml`) поднимать при каждом изменении состава: у всех игроков должен быть один набор.
   Новая версия на `main` выходит сама — CI выпускает `v<версия>` с `.mrpack` и экземпляром Prism, заметки берёт из
   её строки в «Версиях» ниже (без строки релиз не выйдет).
@@ -205,8 +207,9 @@ Default Options — только у игроков. Его библиотека 
 
 ## Версии
 
-| версия | Airstrike | что изменилось |
+| версия | мод | что изменилось |
 |---|---|---|
+| 0.1.24 | 3.0.0 | Мод Airstrike теперь называется Incoming: Incoming 3.0.0 ([заметки](https://github.com/zentixua/incoming/blob/main/docs/releases/3.0.0.md)) — команда `/incoming`, настройки `incoming-server.toml` и `incoming-client.toml` (прежние `airstrike-*.toml` переименовать, иначе настройки по умолчанию), клавиши мода — снова по умолчанию; старые миры с блоками, предметами и следами ударов мода открываются как прежде |
 | 0.1.23 | 2.10.3 | Моды — до последних версий для 1.21.1: Immersive Aircraft 1.6.0 (самолётам нужен разбег чуть длиннее, руль мышью — \` (Ё), свободный обзор — H, [клавиши](#клавиши)) и Man of Many Planes 0.2.3 под него, Entity Culling 1.11.3, ModernFix 5.27.26, Flashback NeoForge Fixed 1.0.15; NeoForge 21.1.259 — на запуске packwiz-installer спросит, обновить ли его в экземпляре |
 | 0.1.22 | 2.10.3 | ServerCore поднимает дальность тика чанков и симуляции под нагрузкой обратно не выше 8 — сервер теперь с прорисовкой 10 и симуляцией 8 (было 12 и 10): работа потока сервера −20 % на копии Zearth с 6 игроками, рельеф дальше рисует Distant Horizons |
 | 0.1.21 | 2.10.3 | Производительность сервера: Airstrike 2.10.3 ([заметки](https://github.com/zentixua/airstrike/blob/main/docs/releases/2.10.3.md)) — удары не нагружают тик там, где их никто не видит; Almighty 0.3.1 ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.3.1.md)) — стоящие боты ведущего не нагружают сервер; ServerCore на сервере (настройки выше). Замер на копии Zearth, 6 игроков и кампания ведущего по всей карте: работа потока сервера 193 → 72 мс на тик (вместе с G1 на сервере) |
