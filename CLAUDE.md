@@ -25,6 +25,7 @@ pack/                    ← сама сборка: pack.toml (версии иг
                            shaderpacks/*.pw.toml (откуда скачать и хеш), config/ (кладётся в игру как есть)
 tools/prism_instance.py  ← экземпляр Prism, который ставит pack/ с main сам при каждом запуске (Open-Skies.zip)
 tools/pack_dir.py        ← каталог игры из pack/ без Prism (моды по хешам) — для проверок клиентом Incoming
+tools/check_loader.py    ← каждый мод (и вложенные jar) принимает NeoForge из pack.toml; шаг CI
 .github/workflows/build.yml  ← CI «Сборка модов»: индекс свежий, .mrpack и экземпляр Prism (артефакт open-skies);
                                новая version на main — релиз v<version> с ними (заметки — строка README «Версии»)
 ```

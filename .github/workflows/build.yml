@@ -46,6 +46,10 @@ jobs:
           packwiz refresh
           git diff --exit-code -- .
 
+      # мод, которому мало NeoForge сборки, роняет запуск игры («Error loading mods»), а индекс этого не видит
+      - name: Моды принимают NeoForge сборки
+        run: python3 ../tools/check_loader.py .
+
       - name: Версия сборки
         id: version
         run: |
