@@ -136,7 +136,7 @@ metafile = true
 
 [[files]]
 file = "mods/essential.pw.toml"
-hash = "258cd42d5de6e6000aea40333085992d7dce0730d122f82c444de17857920ddd"
+hash = "b8704efc4521c57265565573b51b98e5128b0270e2494592edd64960a1919078"
 metafile = true
 
 [[files]]
@@ -151,7 +151,7 @@ metafile = true
 
 [[files]]
 file = "mods/flashback-neoforge-fixed.pw.toml"
-hash = "21078c72157e49948234516720308d2452e1f5ad0b42c070970a1ba753a0f0f2"
+hash = "874c25cb709104bf22b38002f31736e2d9d59f33f27bd5ef69ac3d0757c10da7"
 metafile = true
 
 [[files]]
@@ -161,7 +161,7 @@ metafile = true
 
 [[files]]
 file = "mods/forgified-fabric-api.pw.toml"
-hash = "25a556023b4d7e138e11f788afa93ce550de2c77b7d1eeb0b7828caf5fa49642"
+hash = "13eb88becee8bfceb6027d97af71ab3bded57dc45d5db9cb36e55109fa99aa27"
 metafile = true
 
 [[files]]
@@ -181,7 +181,7 @@ metafile = true
 
 [[files]]
 file = "mods/immediatelyfast.pw.toml"
-hash = "2863a3b187723e1f69ed2ad2b2c3d834e8442468a1347c80df5b310e243c8753"
+hash = "4601b9be31b6e131dca8a148c974d015444bcac7c82fcb66fbd8751a67933a5d"
 metafile = true
 
 [[files]]
@@ -191,7 +191,7 @@ metafile = true
 
 [[files]]
 file = "mods/incoming.pw.toml"
-hash = "8c5c9b79b6b3f5dfaa1d128748288f674208e08b2bf1d4e140c5a998a9f305d1"
+hash = "8de1f67f35a69064e7a27e6d4445c12d1ea37d5f20e7121af1391f68b330234c"
 metafile = true
 
 [[files]]
@@ -211,7 +211,7 @@ metafile = true
 
 [[files]]
 file = "mods/jei.pw.toml"
-hash = "8bc018284b753276f8e3510101852809bcccdad31a7ae17847df210c71a2c512"
+hash = "7358789081b9ff127b20b86bee860392e60587fa90c3e61a3a05c8983f06013d"
 metafile = true
 
 [[files]]
