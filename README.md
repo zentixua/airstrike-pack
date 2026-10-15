@@ -208,6 +208,7 @@ Default Options — только у игроков. Его библиотека 
 
 | версия | мод | что изменилось |
 |---|---|---|
+| 0.1.28 | 3.1.0 | NeoForge 21.1.262 — его требует Forgified Fabric API из 0.1.27 (без него игра не запускалась); на запуске packwiz-installer спросит, обновить ли его в экземпляре |
 | 0.1.27 | 3.1.0 | Incoming 3.1.0 ([заметки](https://github.com/zentixua/incoming/blob/main/docs/releases/3.1.0.md)) — оружие под настоящими названиями (Shahed, Lancet, Grad), стена пыли ядерного взрыва идёт по рельефу и несёт обломки, осадки позже, МБР разгоняется как настоящая, удар по месту на земле `at <x z>`; обновлены JEI, ImmediatelyFast, Essential, Forgified Fabric API и Flashback NeoForge Fixed |
 | 0.1.26 | 3.0.1 | Сборка теперь называется Open Skies: файлы установки `Open-Skies.zip` и `Open-Skies.mrpack`, репозиторий zentixua/open-skies, прежние ссылки на `Airstrike-Pack.zip` и `.mrpack` больше не работают. Поставленные экземпляры обновляются как прежде, моды и настройки те же ([установка](#установка)) |
 | 0.1.25 | 3.0.1 | Incoming 3.0.1 ([заметки](https://github.com/zentixua/incoming/blob/main/docs/releases/3.0.1.md)) — ЗРК настоящей величины, надписи пульта помещаются в окно и кнопки; Almighty 0.4.0 на сервере ([заметки](https://github.com/zentixua/almighty/blob/main/docs/releases/0.4.0.md)) — тексты моста по-английски, набор ведущего в `mcp/gm` |
